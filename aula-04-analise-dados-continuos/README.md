@@ -30,11 +30,18 @@ Tente o mesmo com o valor dos pedidos. Os 21.350 pedidos têm 1.113 valores dife
 A saída é parar de contar valores e passar a contar **faixas**. Em vez de perguntar "quantos pedidos custaram exatamente R\$ 103,75?", pergunte "quantos pedidos custaram entre R\$ 100,00 e R\$ 150,00?".
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart LR
-    A["21.350 valores de pedido<br/>1.113 valores diferentes"] --> B["Escolher a largura<br/>da faixa: R$ 50"]
-    B --> C["Contar quantos pedidos<br/>caem em cada faixa"]
-    C --> D["Desenhar uma barra<br/>por faixa"]
-    D --> E["Histograma"]
+    A("21.350 valores de pedido<br/>1.113 valores diferentes") --> B("Escolher a largura<br/>da faixa: R$ 50")
+    B --> C("Contar quantos pedidos<br/>caem em cada faixa")
+    C --> D("Desenhar uma barra<br/>por faixa")
+    D --> E("<b>Histograma</b>")
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef neutro fill:#F4F2EE,stroke:#DCD8D1,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class A nevoa
+    class B,C,D neutro
+    class E destaque
 ```
 
 Cada faixa é uma **classe** (ou *bin*). O gráfico de barras dessas contagens é o **histograma**.
@@ -97,12 +104,17 @@ Essa é a leitura mais útil do histograma no dia a dia: ele responde "qual a ch
 Olhar um histograma é ler quatro características ao mesmo tempo.
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart TD
-    H["O que o histograma mostra"]
-    H --> A["Tendência central<br/>onde fica o miolo dos dados"]
-    H --> B["Dispersão<br/>o quanto os dados se espalham"]
-    H --> C["Assimetria<br/>para que lado a cauda estica"]
-    H --> D["Curtose<br/>pico alto e estreito ou achatado"]
+    H("<b>O que o histograma mostra</b>")
+    H --> A("Tendência central<br/><i>onde fica o miolo dos dados</i>")
+    H --> B("Dispersão<br/><i>o quanto os dados se espalham</i>")
+    H --> C("Assimetria<br/><i>para que lado a cauda estica</i>")
+    H --> D("Curtose<br/><i>pico alto e estreito ou achatado</i>")
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class H destaque
+    class A,B,C,D nevoa
 ```
 
 **Tendência central** é a posição do bloco principal. No histograma dos pedidos, o miolo está entre R\$ 50 e R\$ 200.
@@ -226,15 +238,24 @@ Um único pedido mexeu R\$ 25,31 na média e quase nada na mediana. É por isso 
 ![Os nove pedidos marcados numa linha de valores. A média, em R$ 127,50, fica à direita da mediana e da moda, ambas em R$ 103,75, puxada pelo pedido de R$ 330,00.](imagens/06-nove-pedidos.png)
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart TD
-    A["Qual medida de centro usar?"] --> B{"Os dados têm<br/>valores extremos?"}
-    B -->|"Não"| C["Use a média"]
+    A("Qual medida de centro usar?") --> B{"Os dados têm<br/>valores extremos?"}
+    B -->|"Não"| C("Use a <b>média</b>")
     B -->|"Sim"| D{"Você quer um número que<br/>resista aos extremos?"}
-    D -->|"Sim"| E["Use a mediana"]
-    D -->|"Não"| F["Use a média, mas<br/>mostre a mediana junto"]
-    C --> G["Sempre reporte junto<br/>uma medida de dispersão"]
+    D -->|"Sim"| E("Use a <b>mediana</b>")
+    D -->|"Não"| F("Use a média, mas<br/>mostre a mediana junto")
+    C --> G("<b>Sempre</b> reporte junto<br/>uma medida de dispersão")
     E --> G
     F --> G
+    classDef decisao fill:#FFFFFF,stroke:#8A9A90,color:#1E2A25;
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef medio fill:#C8DDD0,stroke:#AECBBB,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class A nevoa
+    class B,D decisao
+    class C,E,F medio
+    class G destaque
 ```
 
 Nenhuma das três sozinha conta a história inteira:

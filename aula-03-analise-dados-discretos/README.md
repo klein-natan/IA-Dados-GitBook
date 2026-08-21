@@ -118,13 +118,22 @@ Esse 1,18% é uma decisão de cardápio à espera do dono. E o número fica mais
 Tabelas servem para conferir valores com precisão. Mas o olho humano compara barras melhor do que compara números em uma lista. Por isso quase toda tabela de frequência vira gráfico.
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart TD
-    A["Tabela de frequência pronta"] --> B{"Quantas categorias?"}
-    B -->|"Até 4 e você quer<br/>mostrar parte de um todo"| C["Gráfico de pizza<br/>com moderação"]
-    B -->|"Poucas, mas com<br/>valores parecidos"| D["Gráfico de barras"]
-    B -->|"Muitas"| E{"Você quer saber quais<br/>poucas respondem<br/>pela maior parte?"}
-    E -->|"Sim"| F["Gráfico de Pareto"]
-    E -->|"Não"| G["Barras horizontais<br/>com o top 10 ou 15"]
+    A("Tabela de frequência pronta") --> B{"Quantas<br/>categorias?"}
+    B -->|"Até 4, mostrando<br/>parte de um todo"| C("Gráfico de pizza<br/><i>com moderação</i>")
+    B -->|"Poucas, com<br/>valores parecidos"| DD("Gráfico de barras")
+    B -->|"Muitas"| E{"Poucas respondem<br/>pela maior parte?"}
+    E -->|"Sim"| F("Gráfico de Pareto")
+    E -->|"Não"| G("Barras horizontais<br/>com o top 10 ou 15")
+    classDef ambar fill:#FBF1E4,stroke:#B86E1B,color:#7A4711;
+    classDef decisao fill:#FFFFFF,stroke:#8A9A90,color:#1E2A25;
+    classDef medio fill:#C8DDD0,stroke:#AECBBB,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class A nevoa
+    class B,E decisao
+    class C ambar
+    class DD,F,G medio
 ```
 
 O **gráfico de barras** é o canivete suíço dos dados discretos. Cada categoria vira uma barra e a altura representa a frequência. Funciona com qualquer quantidade de categorias.

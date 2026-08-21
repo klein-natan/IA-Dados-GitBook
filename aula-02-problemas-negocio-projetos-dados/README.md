@@ -37,11 +37,20 @@ Repare no que a tradução acrescentou: o que medir (custo de fornecedor e ticke
 É comum confundir BI com um programa cheio de gráficos coloridos. BI é o caminho inteiro que leva de um fato bruto até uma ação que muda o resultado do mês.
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart LR
-    A["Dado<br/>o registro bruto"] --> B["Informação<br/>o dado organizado"]
-    B --> C["Decisão<br/>a leitura do gestor"]
-    C --> D["Ação<br/>a mudança no mundo real"]
-    D -->|"gera novos dados"| A
+    A("<b>Dado</b><br/>o registro bruto") --> B("<b>Informação</b><br/>o dado organizado")
+    B --> C("<b>Decisão</b><br/>a leitura do gestor")
+    C --> D("<b>Ação</b><br/>a mudança no mundo real")
+    D -.->|"gera novos dados"| A
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef medio fill:#C8DDD0,stroke:#AECBBB,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    classDef verde fill:#5F9C7A,stroke:#5F9C7A,color:#FFFFFF;
+    class A nevoa
+    class B medio
+    class C verde
+    class D destaque
 ```
 
 Cada etapa tem um exemplo na pizzaria de Vitto:
@@ -105,16 +114,21 @@ A dimensão de tempo é obrigatória. Mesmo que o armazém não tenha nenhuma ou
 Quando você desenha a tabela de fatos no centro e as dimensões ao redor, o resultado parece uma estrela. Daí o nome: **modelo estrela** (*star schema*).
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart TD
-    T["D_Tempo<br/>ano, mês, dia da semana"]
-    G["D_Geografia<br/>estado, bairro"]
-    F["F_Venda<br/>valor, frete, quantidade"]
-    C["D_Cliente<br/>nome, e-mail"]
-    P["D_Produto<br/>sabor, tamanho, borda"]
+    T("<b>D_Tempo</b><br/>ano, mês, dia da semana")
+    G("<b>D_Geografia</b><br/>estado, bairro")
+    C("<b>D_Cliente</b><br/>nome, e-mail")
+    P("<b>D_Produto</b><br/>sabor, tamanho, borda")
+    F("<b>F_Venda</b><br/>valor, frete, quantidade")
     T --> F
     G --> F
     C --> F
     P --> F
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class T,G,C,P nevoa
+    class F destaque
 ```
 
 O desenho é simples de propósito: quanto menos saltos entre tabelas, mais rápida a consulta. Com essa estrutura, uma pergunta como "quantas pizzas de borda recheada foram entregues no Centro nas noites de domingo do ano passado?" cruza quatro dimensões e volta em segundos.
@@ -124,15 +138,24 @@ O desenho é simples de propósito: quanto menos saltos entre tabelas, mais ráp
 Assim como o pizzaiolo distingue farinha, azeite e fermento, o analista precisa distinguir tipos de dado. Cada tipo aceita um tratamento diferente — e recusa os outros.
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart TD
-    D["Dados"] --> E["Estruturados<br/>cabem em linhas e colunas"]
-    D --> N["Não estruturados<br/>texto, imagem, áudio"]
-    E --> DI["Discretos<br/>você conta"]
-    E --> CO["Contínuos<br/>você mede"]
-    E --> DT["Data e hora"]
-    DI --> NO["Nominais<br/>sem ordem"]
-    DI --> OR["Ordinais<br/>com ordem"]
-    DI --> CT["Contagem<br/>números inteiros"]
+    D("<b>Dados</b>") --> E("<b>Estruturados</b><br/>cabem em linhas e colunas")
+    D --> N("<b>Não estruturados</b><br/>texto, imagem, áudio")
+    E --> DI("Discretos<br/><i>você conta</i>")
+    E --> CO("Contínuos<br/><i>você mede</i>")
+    E --> DT("Data e hora")
+    DI --> NO("Nominais<br/><i>sem ordem</i>")
+    DI --> OR("Ordinais<br/><i>com ordem</i>")
+    DI --> CT("Contagem<br/><i>números inteiros</i>")
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef medio fill:#C8DDD0,stroke:#AECBBB,color:#1E2A25;
+    classDef neutro fill:#F4F2EE,stroke:#DCD8D1,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class D destaque
+    class E,N medio
+    class DI,CO,DT nevoa
+    class NO,OR,CT neutro
 ```
 
 **Dados discretos** são contáveis ou categorizados, sem valores intermediários. Dividem-se em três:
@@ -174,13 +197,20 @@ Repare que os três casos partem do mesmo lugar: dados que já existiam e ningu�
 Tudo o que vimos nesta aula se encaixa em um circuito. Ele começa e termina na operação.
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart TD
-    A["1. Operação<br/>a pizza é vendida"] --> B["2. Captura<br/>OLTP registra o pedido"]
-    B --> C["3. Armazenamento<br/>OLAP consolida fatos e dimensões"]
-    C --> D["4. Análise<br/>BI mostra o passado, IA projeta o futuro"]
-    D --> E["5. Decisão<br/>o gestor escolhe a ação"]
-    E --> F["6. Resultado<br/>menos desperdício, mais margem"]
-    F --> A
+    A("<b>1. Operação</b><br/>a pizza é vendida") --> B("<b>2. Captura</b><br/>OLTP registra o pedido")
+    B --> C("<b>3. Armazenamento</b><br/>OLAP consolida fatos e dimensões")
+    C --> D("<b>4. Análise</b><br/>BI mostra o passado, IA projeta o futuro")
+    D --> E("<b>5. Decisão</b><br/>o gestor escolhe a ação")
+    E --> F("<b>6. Resultado</b><br/>menos desperdício, mais margem")
+    F -.-> A
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef medio fill:#C8DDD0,stroke:#AECBBB,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class A,B,C nevoa
+    class D,E medio
+    class F destaque
 ```
 
 A essência do negócio não muda. Vitto continua fazendo pizza boa com ingrediente bom. O que muda é que as decisões de fora da cozinha param de depender de intuição.

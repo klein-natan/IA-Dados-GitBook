@@ -30,11 +30,18 @@ O objetivo do BI é esse: tirar a decisão do "eu acho" e colocá-la em cima de 
 A pergunta nunca mudou — "o que os dados dizem?". O que mudou foi quem consegue respondê-la e em quanto tempo.
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart LR
-    A["Anos 1970-1990<br/>Sistemas de apoio à decisão<br/>quem responde: a TI"]
-    B["Anos 2000-2015<br/>Self-service BI<br/>quem responde: o analista"]
-    C["Hoje<br/>BI com IA<br/>quem responde: qualquer um,<br/>conversando com os dados"]
+    A("<b>Anos 1970-1990</b><br/>Sistemas de apoio à decisão<br/><i>quem responde: a TI</i>")
+    B("<b>Anos 2000-2015</b><br/>Self-service BI<br/><i>quem responde: o analista</i>")
+    C("<b>Hoje</b><br/>BI com IA<br/><i>quem responde: você</i>")
     A --> B --> C
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef medio fill:#C8DDD0,stroke:#AECBBB,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class A nevoa
+    class B medio
+    class C destaque
 ```
 
 ## A era do relatório que demorava três dias
@@ -68,10 +75,19 @@ Essa combinação tem nome: **Inteligência de Decisão** (*Decision Intelligenc
 O instituto Gartner descreve a maturidade analítica como uma escada. Cada degrau responde a uma pergunta diferente e vale mais que o anterior.
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart TD
-    A["1. Descritiva<br/>O que aconteceu?"] --> B["2. Diagnóstica<br/>Por que aconteceu?"]
-    B --> C["3. Preditiva<br/>O que vai acontecer?"]
-    C --> D["4. Prescritiva<br/>O que devemos fazer?"]
+    A("<b>1. Descritiva</b><br/>O que aconteceu?") --> B("<b>2. Diagnóstica</b><br/>Por que aconteceu?")
+    B --> C("<b>3. Preditiva</b><br/>O que vai acontecer?")
+    C --> D("<b>4. Prescritiva</b><br/>O que devemos fazer?")
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef medio fill:#C8DDD0,stroke:#AECBBB,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    classDef verde fill:#5F9C7A,stroke:#5F9C7A,color:#FFFFFF;
+    class A nevoa
+    class B medio
+    class C verde
+    class D destaque
 ```
 
 **Descritiva** olha para o passado e conta. Exemplo: em julho, 12% dos clientes cadastrados não fizeram nenhum pedido.
@@ -93,9 +109,18 @@ O que existe nas empresas é a **IA estreita**: um modelo treinado para resolver
 A diferença entre programar e treinar está na direção da lógica:
 
 ```mermaid
+%%{init:{"theme":"base","themeVariables":{"fontFamily":"Inter,'Segoe UI','Liberation Sans',Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F4F2EE","primaryTextColor":"#1E2A25","primaryBorderColor":"#CBD8D0","lineColor":"#8A9A90","secondaryColor":"#EDF2EE","tertiaryColor":"#FFFFFF","clusterBkg":"#F8F7F4","clusterBorder":"#E2DED7","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart LR
-    A1["Programação tradicional:<br/>dados + regras escritas<br/>por uma pessoa"] --> A2["Programa"] --> A3["Resposta"]
-    B1["Machine Learning:<br/>dados + respostas<br/>conhecidas do passado"] --> B2["Treinamento"] --> B3["Regras descobertas<br/>pela máquina"]
+    A1("<b>Programação tradicional</b><br/>dados + regras escritas<br/>por uma pessoa") --> A2("Programa") --> A3("Resposta")
+    B1("<b>Machine Learning</b><br/>dados + respostas<br/>conhecidas do passado") --> B2("Treinamento") --> B3("Regras descobertas<br/>pela máquina")
+    classDef destaque fill:#1D5537,stroke:#1D5537,color:#FFFFFF;
+    classDef medio fill:#C8DDD0,stroke:#AECBBB,color:#1E2A25;
+    classDef neutro fill:#F4F2EE,stroke:#DCD8D1,color:#1E2A25;
+    classDef nevoa fill:#EAF1EC,stroke:#C3D6CA,color:#1E2A25;
+    class A1,B1 nevoa
+    class A2,B2 neutro
+    class A3 medio
+    class B3 destaque
 ```
 
 No modelo tradicional, alguém escreve a regra: "no almoço, prepare 20% mais massa". No *machine learning*, mostramos ao computador os 358 dias de operação que a planilha registra, com a quantidade que saiu em cada um, e ele descobre sozinho qual é o padrão — inclusive coisas que ninguém pensou em escrever, como o efeito de chover.

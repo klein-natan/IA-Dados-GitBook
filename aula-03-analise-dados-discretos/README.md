@@ -60,9 +60,9 @@ $$
 f_r = \frac{f_i}{n} \times 100
 $$
 
-Aqui, $f_i$ é a frequência absoluta da categoria, $n$ é o total de observações e $f_r$ é o resultado, em porcentagem.
+Aqui, $$f_i$$ é a frequência absoluta da categoria, $$n$$ é o total de observações e $$f_r$$ é o resultado, em porcentagem.
 
-Exemplo com a categoria Clássica: $f_i = 14\,579$ e $n = 48\,620$. A conta fica $14\,579 \div 48\,620 = 0{,}2999$, que multiplicado por 100 dá **29,99%**.
+Exemplo com a categoria Clássica: $$f_i = 14\,579$$ e $$n = 48\,620$$. A conta fica $$14\,579 \div 48\,620 = 0{,}2999$$, que multiplicado por 100 dá **29,99%**.
 
 Aplicando a todas as categorias:
 
@@ -88,9 +88,9 @@ $$
 P = \frac{\text{número de ocorrências}}{\text{total de observações}}
 $$
 
-Aqui, $P$ é a probabilidade estimada, entre 0 e 1.
+Aqui, $$P$$ é a probabilidade estimada, entre 0 e 1.
 
-Exemplo: se você sortear uma linha qualquer da planilha, qual a chance de ela ser uma pizza Clássica? A conta é $14\,579 \div 48\,620 = 0{,}2999$. Ou seja, cerca de 30%.
+Exemplo: se você sortear uma linha qualquer da planilha, qual a chance de ela ser uma pizza Clássica? A conta é $$14\,579 \div 48\,620 = 0{,}2999$$. Ou seja, cerca de 30%.
 
 Essa probabilidade descreve o passado. Ela não garante o próximo pedido. Quanto mais dados representativos você tiver, melhor a frequência relativa estima a probabilidade real.
 
@@ -179,11 +179,11 @@ $$
 ME = 1{,}96 \times \sqrt{\frac{p \times (1-p)}{n}}
 $$
 
-Aqui, $p$ é a frequência relativa em proporção (30% vira 0,30), $n$ é o tamanho da amostra e $1{,}96$ é o valor que corresponde a 95% de confiança. O resultado sai em proporção; multiplique por 100 para ter pontos percentuais.
+Aqui, $$p$$ é a frequência relativa em proporção (30% vira 0,30), $$n$$ é o tamanho da amostra e $$1{,}96$$ é o valor que corresponde a 95% de confiança. O resultado sai em proporção; multiplique por 100 para ter pontos percentuais.
 
-Exemplo: você pesquisou uma amostra de 1.000 pedidos e encontrou 30% de pizzas Clássicas. A conta é $0{,}30 \times 0{,}70 = 0{,}21$; dividido por 1.000 dá $0{,}00021$; a raiz quadrada é $0{,}0145$; multiplicado por 1,96 dá $0{,}0284$. A margem é de **±2,84 pontos percentuais**, e a faixa plausível vai de 27,16% a 32,84%.
+Exemplo: você pesquisou uma amostra de 1.000 pedidos e encontrou 30% de pizzas Clássicas. A conta é $$0{,}30 \times 0{,}70 = 0{,}21$$; dividido por 1.000 dá $$0{,}00021$$; a raiz quadrada é $$0{,}0145$$; multiplicado por 1,96 dá $$0{,}0284$$. A margem é de **±2,84 pontos percentuais**, e a faixa plausível vai de 27,16% a 32,84%.
 
-Repare no efeito de $n$: quadruplicar a amostra corta a margem pela metade. É por isso que pesquisas pequenas produzem faixas largas.
+Repare no efeito de $$n$$: quadruplicar a amostra corta a margem pela metade. É por isso que pesquisas pequenas produzem faixas largas.
 
 ## Contar uma história com os números
 

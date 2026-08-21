@@ -178,7 +178,7 @@ $$
 \bar{x} = \frac{1}{n}\sum_{i=1}^{n}x_i
 $$
 
-Aqui, $x_i$ é cada valor da lista, $n$ é quantos valores existem, e $\bar{x}$ (lido "x-barra") é o resultado: a média.
+Aqui, $$x_i$$ é cada valor da lista, $$n$$ é quantos valores existem, e $$\bar{x}$$ (lido "x-barra") é o resultado: a média.
 
 Exemplo com os nove pedidos. Soma:
 
@@ -287,7 +287,7 @@ $$
 s^2 = \frac{\sum_{i=1}^{n}(x_i - \bar{x})^2}{n-1}
 $$
 
-Aqui, $x_i$ é cada valor, $\bar{x}$ é a média, $n$ é a quantidade de valores, e $s^2$ é a variância.
+Aqui, $$x_i$$ é cada valor, $$\bar{x}$$ é a média, $$n$$ é a quantidade de valores, e $$s^2$$ é a variância.
 
 Exemplo com os nove pedidos, média R\$ 127,50:
 
@@ -321,7 +321,7 @@ O desvio-padrão é R\$ 82,59. Leitura prática: os pedidos daquela noite se afa
 O gráfico mostra de onde vem o número. Oito pedidos ficam perto da média; o nono está R\$ 202,50 acima dela. Como a fórmula eleva cada distância ao quadrado, esse único pedido responde por 75% da soma final.
 
 {% hint style="warning" %}
-Repare que dividimos por $n-1$, e não por $n$. Isso vale quando os dados são uma **amostra** — um pedaço do todo, como nove pedidos de um dia inteiro. Quando você tem a população completa, divide por $n$. No Google Planilhas, `DESVPAD` divide por $n-1$ e `DESVPADP` divide por $n$. Na dúvida, use `DESVPAD`.
+Repare que dividimos por $$n-1$$, e não por $$n$$. Isso vale quando os dados são uma **amostra** — um pedaço do todo, como nove pedidos de um dia inteiro. Quando você tem a população completa, divide por $$n$$. No Google Planilhas, `DESVPAD` divide por $$n-1$$ e `DESVPADP` divide por $$n$$. Na dúvida, use `DESVPAD`.
 {% endhint %}
 
 ## Desvio absoluto médio
@@ -334,7 +334,7 @@ $$
 MAD = \frac{\sum_{i=1}^{n}|x_i - \bar{x}|}{n}
 $$
 
-As barras verticais $|\;|$ significam "ignore o sinal": $|-67{,}50| = 67{,}50$. O resto é igual: $x_i$ é cada valor, $\bar{x}$ é a média, $n$ é a quantidade.
+As barras verticais $$|\;|$$ significam "ignore o sinal": $$|-67{,}50| = 67{,}50$$. O resto é igual: $$x_i$$ é cada valor, $$\bar{x}$$ é a média, $$n$$ é a quantidade.
 
 Exemplo com os mesmos nove pedidos. Soma das distâncias sem sinal:
 
@@ -358,7 +358,7 @@ $$
 CV = \frac{s}{\bar{x}}
 $$
 
-Aqui, $s$ é o desvio-padrão e $\bar{x}$ é a média. O resultado não tem unidade — é uma proporção, que costuma ser lida em porcentagem.
+Aqui, $$s$$ é o desvio-padrão e $$\bar{x}$$ é a média. O resultado não tem unidade — é uma proporção, que costuma ser lida em porcentagem.
 
 Exemplo com os nove pedidos:
 
@@ -438,7 +438,7 @@ $$
 \text{limite superior} = Q_3 + 1{,}5 \times IQR
 $$
 
-Aqui, $Q_1$ e $Q_3$ são o primeiro e o terceiro quartil, e $IQR$ é a distância entre eles. Tudo que ficar fora desses dois limites é outlier.
+Aqui, $$Q_1$$ e $$Q_3$$ são o primeiro e o terceiro quartil, e $$IQR$$ é a distância entre eles. Tudo que ficar fora desses dois limites é outlier.
 
 Exemplo com os nove pedidos, onde Q1 = 83,75, Q3 = 146,25 e IQR = 62,50:
 

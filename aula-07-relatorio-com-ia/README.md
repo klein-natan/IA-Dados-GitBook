@@ -32,7 +32,7 @@ A mesa recebe o resumo, não a planilha. É o mesmo raciocínio de um bom analis
 
 Os **modelos de raciocínio** gastam um tempo "pensando" antes de responder: quebram o problema em partes, testam caminhos e revisam o próprio rascunho. Eles acertam mais em tarefas com várias etapas, como planejar uma análise, e custam mais tempo (e mais tokens).
 
-Use esse tipo de modelo para **planejar** a análise e revisar conclusões. Para tarefas simples ("troque a cor do gráfico"), um modelo rápido resolve. No Antigravity, você escolhe o modelo no painel do agente.
+Use esse tipo de modelo para **planejar** a análise e revisar conclusões. Para tarefas simples ("troque a cor do gráfico"), um modelo rápido resolve. Nos três agentes, você escolhe o modelo na janela da conversa. Nos planos gratuitos, a lista é menor, mas costuma ter ao menos uma opção de raciocínio.
 
 ## O que pode ir para a IA
 
@@ -51,13 +51,16 @@ O agente não sabe o que é `id_pedido`, nem que uma linha é um item e não um 
 Comece toda análise com duas coisas: o **dicionário de dados** (o que cada coluna significa) e a **pergunta de negócio** (que decisão o resultado vai apoiar).
 
 ```text
-Dicionário de dados de vendas-pizzas.csv:
+Dicionário de dados de vendas-pizzas.csv (16 colunas):
 - Cada linha é UM ITEM vendido. Um pedido pode ter várias linhas.
-- id_pedido: identifica o pedido. Use para contar pedidos.
+- id_venda: identifica a linha. id_pedido: identifica o pedido; use para contar pedidos.
 - quantidade: número de pizzas daquele item.
-- preco_total: valor do item em reais (já multiplicado pela quantidade).
-- data_pedido: dia/mês/ano. hora_pedido: hh:mm:ss.
-- tamanho: P, M, G, GG. categoria: Clássica, Especial, Vegetariana, Frango.
+- preco_unitario e preco_total: TEXTO no formato "R$ 66,25". Converta para número antes de somar.
+  preco_total já está multiplicado pela quantidade.
+- data_pedido: dd/mm/aaaa. hora_pedido: hh:mm:ss.
+- dia_semana_num: 1 = domingo ... 7 = sábado. dia_semana_txt: o nome do dia.
+- tamanho: P, M, G, GG (tamanho_num: 1 a 4). categoria: Clássica, Especial, Vegetariana, Frango.
+- nome_pizza: nome completo. nome_pizza_simp: nome curto, sem "Pizza".
 
 Pergunta de negócio: o Vitto vai decidir o cardápio e a escala da equipe do próximo ano.
 ```
@@ -109,8 +112,10 @@ Cardápio e escala da equipe para o próximo ano.
 - Pizzas vendidas = soma de quantidade.
 
 ## Regras dos dados
+- Os preços vêm como texto ("R$ 66,25"): converta para número antes de qualquer conta.
 - O último mês da planilha está incompleto: identifique-o, mostre-o destacado e não o compare com meses completos.
-- Procure problemas de qualidade (nomes fora do padrão, valores estranhos) e liste-os.
+- Procure problemas de qualidade (campos vazios, nomes fora do padrão, valores estranhos), liste-os
+  e diga como cada um foi tratado.
 
 ## Formato
 - relatorio.html, um arquivo, em português, valores em R$ com vírgula decimal.
@@ -139,7 +144,7 @@ Use esta tabela para conferir o trabalho do agente. Se um número não bater, de
 | Controle | Valor |
 | --- | --- |
 | Linhas (itens) | 48.620 |
-| Pizzas vendidas (soma de quantidade) | 49.574 |
+| Pizzas vendidas (soma de quantidade) | 49.573, somando o que está preenchido (há uma linha sem quantidade) |
 | Pedidos (id_pedido distintos) | 21.350 |
 | Faturamento total | R\$ 4.089.300,25 |
 | Ticket médio | R\$ 191,54 |
@@ -158,7 +163,7 @@ Repare também na pergunta 2. Nas aulas 3 a 5, você viu o Pareto como "poucos i
 
 Toda conversa nova começa com a mesa vazia. Repetir "calcule com código, use R\$, escreva em português" em cada pedido cansa e você esquece. A solução é um arquivo de **regras** que o agente lê sozinho, sempre.
 
-No Antigravity, um arquivo `AGENTS.md` (ou `GEMINI.md`) na raiz do projeto é carregado automaticamente em toda conversa daquela pasta. Regras mais específicas podem ficar em `.agents/rules/`.
+O Antigravity, o OpenCode e o Cursor carregam sozinhos um arquivo `AGENTS.md` que esteja na pasta do projeto, em toda conversa. Você escreve as regras uma vez e elas valem em qualquer um dos três. Cada ferramenta também tem um lugar próprio para regras mais detalhadas, como `.agents/rules/` no Antigravity e `.cursor/rules/` no Cursor.
 
 ```markdown
 # Regras deste projeto
@@ -174,7 +179,15 @@ Isso tem um nome que você vai ouvir muito: **engenharia de contexto**. É decid
 
 ## Projeto: o relatório do Vitto no seu site
 
-**Passo 1. Prepare a pasta.** Abra o projeto do seu site no Antigravity. Crie a pasta `relatorio-vitto` com uma subpasta `dados`. Abra a [planilha de vendas](https://docs.google.com/spreadsheets/d/1blCNnBRkUsfui_Dfxx5otrY95CObraKghRKDCV7scSE/edit?usp=sharing), vá em **Arquivo → Fazer download → Valores separados por vírgula (.csv)** e salve como `relatorio-vitto/dados/vendas-pizzas.csv`.
+**Passo 1. Prepare a pasta.** Abra o projeto do seu site no agente que preferir e peça:
+
+```text
+Crie a pasta relatorio-vitto/dados e baixe nela, com o nome vendas-pizzas.csv, o arquivo:
+https://docs.google.com/spreadsheets/d/1blCNnBRkUsfui_Dfxx5otrY95CObraKghRKDCV7scSE/export?format=csv
+Depois me diga quantas linhas o arquivo tem e quais são as colunas.
+```
+
+O arquivo deve ter 16 colunas e 48.620 vendas, além da linha de cabeçalho. Se o download falhar, baixe à mão: abra a [planilha de vendas](https://docs.google.com/spreadsheets/d/1blCNnBRkUsfui_Dfxx5otrY95CObraKghRKDCV7scSE/edit?usp=sharing), vá em **Arquivo → Fazer download → Valores separados por vírgula (.csv)** e salve na pasta.
 
 **Passo 2. Crie as regras.** Crie `relatorio-vitto/AGENTS.md` com o conteúdo da seção anterior.
 
@@ -183,7 +196,7 @@ Isso tem um nome que você vai ouvir muito: **engenharia de contexto**. É decid
 **Passo 4. Peça o plano.**
 
 ```text
-/plan Leia relatorio-vitto/spec.md e relatorio-vitto/AGENTS.md.
+Não altere nada ainda. Leia relatorio-vitto/spec.md e relatorio-vitto/AGENTS.md.
 Planeje a análise do arquivo relatorio-vitto/dados/vendas-pizzas.csv para gerar relatorio-vitto/relatorio.html.
 O plano deve dizer: como cada métrica será calculada, como o mês incompleto será tratado
 e quais scripts serão criados. Espere a minha aprovação.
@@ -216,7 +229,8 @@ Depois peça as correções na conversa original. Um modelo que revisa o trabalh
 **Passo 8. Publique.** Peça para adicionar o relatório à seção de projetos do site, com um cartão e um link. Depois:
 
 ```text
-Faça commit com a mensagem "relatório da pizzaria" e envie para o GitHub.
+Publique: faça commit com a mensagem "relatório da pizzaria", envie para o GitHub
+e me avise quando o relatório estiver no ar, com o endereço completo.
 ```
 
 Em alguns minutos, o relatório estará em `https://seuusuario.github.io/relatorio-vitto/relatorio.html`.

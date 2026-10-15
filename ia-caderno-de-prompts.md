@@ -33,7 +33,7 @@ Pergunta de negócio: [decisão que o resultado vai apoiar].
 ## Plano primeiro (Aulas 6 a 10)
 
 ```text
-/plan [tarefa]. Mostre o plano e espere a minha aprovação.
+Não altere nada ainda. [tarefa]. Mostre o plano e espere a minha aprovação.
 O plano deve dizer: [o que você quer conferir antes da execução].
 ```
 

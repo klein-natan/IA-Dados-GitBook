@@ -102,25 +102,35 @@ Há centenas de ferramentas de IA, e os nomes mudam a cada poucos meses. Em vez 
 **Usuário avançado escolhe a ferramenta pela tarefa.** Pergunta rápida: chat. Pesquisa com fontes: chat com busca na web ou "pesquisa aprofundada". Trabalho sobre arquivos e código: agente. Dado sigiloso: modelo local ou plano empresarial que não treina com seus dados.
 {% endhint %}
 
-## Agentes e o Antigravity
+## Três agentes: Antigravity, OpenCode e Cursor
 
 Um chat responde. Um **agente** age. Ele recebe um objetivo, faz um plano, usa ferramentas (editor de arquivos, terminal, navegador), observa o resultado e repete até terminar. Na Aula 8 você vai ver esse ciclo em detalhe. Hoje basta usar.
 
-O **Google Antigravity** é um ambiente de trabalho feito para agentes. Ele tem duas partes:
+Você vai conhecer três agentes, todos com plano gratuito:
 
-* **o editor**, onde você vê e edita os arquivos do projeto;
-* **o painel do agente** (e o Agent Manager, que gerencia várias conversas de agente ao mesmo tempo).
+| | Google Antigravity | OpenCode | Cursor |
+| --- | --- | --- | --- |
+| O que é | ambiente feito para agentes, do Google | agente de código aberto | editor de código com agente embutido |
+| Como se usa | aplicativo de desktop | aplicativo de desktop, terminal ou extensão de editor | aplicativo de desktop |
+| Modelos no gratuito | Gemini, com cota semanal | modelos gratuitos do OpenCode Zen, que mudam com o tempo | modelos Grok, com cota inicial limitada |
+| Destaque | planos e capturas de tela para revisar | aberto e configurável; pode usar quase qualquer modelo | editor completo, muito usado no mercado |
 
-O agente do Antigravity se comunica por **artefatos**: documentos que ele produz para você revisar antes e depois de trabalhar. Os principais são a lista de tarefas, o **plano de implementação** (o que ele pretende fazer, arquivo por arquivo), o resumo do que foi feito e capturas de tela do resultado.
+*Planos gratuitos em outubro de 2026. Eles mudam com frequência: o do Cursor, por exemplo, mudou nesse mês, quando a empresa passou a fazer parte da SpaceX.*
 
-O ponto mais importante: você pode pedir que o agente **planeje antes de agir**. No modo de planejamento (ou com o comando `/plan`), ele escreve o plano e para. Você lê, comenta o que está errado e só então clica em **Proceed** para ele executar.
+Por que três? Porque nenhum agente é o melhor em tudo, e porque **as cotas gratuitas acabam**. Quem sabe usar mais de um troca de ferramenta e continua trabalhando. E o que você aprende vale para todos: pedir bem, revisar o plano, conferir o resultado.
+
+Os três têm em comum o que importa para você:
+
+* **Planejar antes de agir.** No Antigravity, o modo de planejamento (ou o comando `/plan`) gera um plano de implementação que você comenta e aprova com **Proceed**. No OpenCode, a tecla **Tab** alterna entre o agente **Plan**, que só propõe, e o **Build**, que executa. Em qualquer agente, funciona dizer: "não altere nada ainda, só me mostre o plano".
+* **Pedir permissão antes de rodar comandos.** Deixe essa opção ligada e leia cada comando antes de aprovar.
+* **Ler o arquivo `AGENTS.md`.** Os três seguem as regras escritas num arquivo `AGENTS.md` na pasta do projeto. Você vai usar isso a partir da Aula 7: as mesmas regras servem para qualquer agente.
 
 {% hint style="warning" %}
-O agente roda comandos no seu computador. Nas configurações do Antigravity, deixe-o **pedir sua aprovação antes de executar comandos no terminal**. Leia cada comando antes de aprovar. Se não entender, pergunte ao próprio agente: "o que esse comando faz?".
+O agente roda comandos no seu computador. Leia cada comando antes de aprovar. Se não entender, pergunte ao próprio agente: "o que esse comando faz?".
 {% endhint %}
 
-{% hint style="info" %}
-O plano gratuito do Antigravity tem uma cota de uso renovada semanalmente (outubro de 2026). Se a cota acabar no meio da aula, trabalhe em dupla com quem ainda tem cota.
+{% hint style="success" %}
+**Usuário avançado não depende de uma ferramenta só.** Dê a mesma spec a dois agentes e compare os resultados. Onde eles discordam, há algo para você decidir.
 {% endhint %}
 
 ## Técnica de prompting: a anatomia do pedido
@@ -205,7 +215,7 @@ Três nomes parecidos, três coisas diferentes:
 
 ![Do seu computador para a internet](imagens/f06-publicar.png)
 
-Você não precisa decorar comandos de Git. O agente sabe usá-los. Você precisa saber **o que** pedir ("faça um commit com a mensagem tal e envie para o GitHub") e **ler** o comando antes de aprovar.
+Você não precisa decorar comandos nem clicar em menus do GitHub. Na preparação, você conectou o computador ao GitHub com o **GitHub CLI** (`gh`). A partir daí, o agente usa o `git` e o `gh` para criar o repositório, salvar as fotos, enviar e ligar a publicação. O seu trabalho é **pedir** com clareza, **ler** cada comando antes de aprovar e **conferir** o resultado no navegador.
 
 {% hint style="warning" %}
 No plano gratuito do GitHub, o repositório de um site do GitHub Pages é **público**: qualquer pessoa vê todos os arquivos, inclusive versões antigas. Nunca coloque ali senha, chave de API, telefone ou documento. Apagar depois não resolve: o histórico guarda tudo.
@@ -213,16 +223,21 @@ No plano gratuito do GitHub, o repositório de um site do GitHub Pages é **púb
 
 ## Projeto: o seu site no ar
 
-**Passo 1. Crie o repositório.** No GitHub, clique em **+** → **New repository**. O nome precisa ser exatamente `seuusuario.github.io` (troque pelo seu usuário, em minúsculas). Deixe **Public**, ative **Add README** e clique em **Create repository**.
+Escolha um dos três agentes para este projeto. Os prompts funcionam em qualquer um.
 
-**Passo 2. Traga o repositório para o computador.** Abra o Antigravity, abra uma pasta onde você guarda projetos (por exemplo, `Documentos/projetos-ia`) e peça:
+**Passo 1. Abra uma pasta de projetos.** Crie uma pasta onde vai guardar os projetos da disciplina, por exemplo `Documentos/projetos-ia`, e abra essa pasta no agente.
+
+**Passo 2. Peça ao agente para criar o repositório.**
 
 ```text
-Clone o repositório https://github.com/SEUUSUARIO/SEUUSUARIO.github.io nesta pasta
-e abra a pasta clonada como projeto.
+Use o GitHub CLI (gh) para:
+1. descobrir o meu usuário do GitHub;
+2. criar um repositório público chamado USUARIO.github.io (com o meu usuário em minúsculas);
+3. cloná-lo nesta pasta e abrir a pasta clonada como projeto.
+Me mostre cada comando antes de rodar.
 ```
 
-Na primeira vez, o Git pode abrir o navegador para você entrar no GitHub. Entre e autorize.
+Se o `gh` disser que você não está conectado, volte à página de preparação e refaça o `gh auth login`.
 
 **Passo 3. Escreva a spec.** Crie o arquivo `spec.md` na pasta do projeto, copie o modelo da seção anterior e preencha. Se travar, peça ajuda ao agente:
 
@@ -232,16 +247,16 @@ Me entreviste: faça uma pergunta por vez e, no fim, preencha o arquivo com as m
 Não invente nada que eu não tenha dito.
 ```
 
-**Passo 4. Peça o plano.** Use o modo de planejamento:
+**Passo 4. Peça o plano.** Ligue o modo de planejamento do seu agente (ou diga que não é para alterar nada ainda):
 
 ```text
-/plan Leia o spec.md e crie o meu site pessoal seguindo essa spec à risca.
-Antes de implementar, mostre o plano e espere a minha aprovação.
+Leia o spec.md e planeje o meu site pessoal seguindo essa spec à risca.
+Não altere nenhum arquivo ainda: mostre o plano e espere a minha aprovação.
 ```
 
-Leia o plano de implementação. Ele bate com a spec? Ficou faltando alguma seção? Comente direto no plano e só depois clique em **Proceed**.
+Leia o plano. Ele bate com a spec? Ficou faltando alguma seção? Corrija o que estiver errado e só então autorize a execução.
 
-**Passo 5. Veja o resultado.** Peça ao agente para abrir o site no navegador e tirar uma captura de tela em tamanho de celular. Confira com o "pronto quando" da spec.
+**Passo 5. Veja o resultado.** Peça ao agente para abrir o site no navegador e mostrar como fica em tamanho de celular. Confira com o "pronto quando" da spec.
 
 **Passo 6. Melhore em rodadas curtas.** Uma mudança por pedido funciona melhor que dez de uma vez:
 
@@ -254,18 +269,20 @@ Anexei um print de um site que eu gosto. Use a mesma ideia de cabeçalho no meu 
 sem copiar textos nem imagens.
 ```
 
-**Passo 7. Publique.** Peça:
+**Passo 7. Peça a publicação.**
 
 ```text
-Faça um commit com a mensagem "primeira versão do site" e envie para o GitHub.
+Publique o site:
+1. faça um commit com a mensagem "primeira versão do site" e envie para o GitHub;
+2. com o gh, confira se o GitHub Pages está ligado para a branch main, na raiz;
+   se não estiver, ligue;
+3. me diga o endereço do site e avise quando ele estiver no ar.
 ```
 
-Leia os comandos `git add`, `git commit` e `git push` antes de aprovar.
-
-**Passo 8. Ligue o GitHub Pages.** No repositório, vá em **Settings** → **Pages**. Em **Branch**, escolha `main` e a pasta `/ (root)`, e salve. Em até 10 minutos, o site aparece em `https://seuusuario.github.io`. Abra no celular.
+Leia os comandos antes de aprovar. Para ligar o Pages, o agente costuma usar um comando como `gh api --method POST repos/USUARIO/USUARIO.github.io/pages -f "source[branch]=main" -f "source[path]=/"`. A publicação pode levar até 10 minutos. Depois, abra `https://seuusuario.github.io` no celular.
 
 {% hint style="info" %}
-Repositórios com o nome `seuusuario.github.io` costumam publicar automaticamente pela branch `main`. Se a página de **Pages** já mostrar o endereço do site, o passo 8 já está feito.
+Se algo travar no GitHub, peça ao agente: "verifique com o gh o estado do repositório e do GitHub Pages e me explique o problema em linguagem simples". Ele consegue diagnosticar quase tudo sozinho.
 {% endhint %}
 
 ## Checklist do projeto
@@ -293,11 +310,17 @@ Repositórios com o nome `seuusuario.github.io` costumam publicar automaticament
 
 ## Referências
 
+Anomaly. (2026). *OpenCode documentation*. https://opencode.ai/docs
+
 Anthropic. (2024). *Building effective agents*. Anthropic Engineering. https://www.anthropic.com/engineering/building-effective-agents
+
+Cursor. (2026). *Rules*. Cursor Docs. https://cursor.com/docs/context/rules
 
 Delimarsky, D. (2025). *Spec-driven development with AI: Get started with a new open source toolkit*. The GitHub Blog. https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/
 
 GitHub. (2026). *Creating a GitHub Pages site*. GitHub Docs. https://docs.github.com/en/pages/getting-started-with-github-pages/creating-a-github-pages-site
+
+GitHub. (2026). *REST API endpoints for GitHub Pages*. GitHub Docs. https://docs.github.com/en/rest/pages/pages
 
 Google. (2026). *Agent*. Google Antigravity Documentation. https://antigravity.google/docs/agent
 
@@ -306,6 +329,8 @@ Google. (2026). *Implementation plan*. Google Antigravity Documentation. https:/
 Google. (2026). *Plans*. Google Antigravity Documentation. https://antigravity.google/docs/plans
 
 Google. (2026). *Prompt design strategies*. Gemini API Documentation. https://ai.google.dev/gemini-api/docs/prompting-strategies
+
+xAI. (2026, 12 de outubro). *Introducing The X Subscription*. https://x.ai/news/x-subscription
 
 Zwingmann, T. (2022). *AI-powered business intelligence: Improving forecasts and decision making with machine learning*. O'Reilly Media.
 

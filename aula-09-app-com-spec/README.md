@@ -138,7 +138,7 @@ Um sistema de verdade, com vários aparelhos e histórico seguro, precisaria de 
 
 ## A constituição do projeto
 
-O kit de spec-driven development do GitHub chama de **constituição** o arquivo com as regras que valem para tudo no projeto, em toda funcionalidade. No Antigravity, esse papel é do `AGENTS.md` que você conheceu na Aula 7.
+O kit de spec-driven development do GitHub chama de **constituição** o arquivo com as regras que valem para tudo no projeto, em toda funcionalidade. Nos três agentes, esse papel é do `AGENTS.md` que você conheceu na Aula 7.
 
 ```markdown
 # Constituição do app de pedidos
@@ -158,7 +158,7 @@ Você vai fazer o ciclo à mão, com três arquivos (`spec.md`, `plano.md`, `tar
 No mercado, há ferramentas que automatizam essas etapas com comandos. O **Spec Kit**, do GitHub, é o exemplo mais conhecido: ele cria a constituição e oferece um comando para cada etapa (especificar, esclarecer, planejar, criar tarefas, implementar), e funciona com vários agentes.
 
 {% hint style="success" %}
-**Transforme o seu processo numa skill.** No Antigravity, uma **skill** é uma pasta com um arquivo `SKILL.md` contendo instruções para um tipo de tarefa. O agente vê o nome e a descrição de cada skill e só lê as instruções completas quando a tarefa combina. Crie `.agents/skills/spec/SKILL.md` com o seu roteiro de entrevista e a estrutura da spec. Daí em diante, basta digitar `/spec` para começar um projeto novo do jeito certo.
+**Transforme o seu processo numa skill.** As skills seguem um formato aberto, adotado por vários agentes. No Antigravity, uma **skill** é uma pasta com um arquivo `SKILL.md` contendo instruções para um tipo de tarefa. O agente vê o nome e a descrição de cada skill e só lê as instruções completas quando a tarefa combina. Crie `.agents/skills/spec/SKILL.md` com o seu roteiro de entrevista e a estrutura da spec. Daí em diante, basta digitar `/spec` para começar um projeto novo do jeito certo.
 {% endhint %}
 
 ```markdown
@@ -181,7 +181,7 @@ description: Conduz a escrita de uma spec antes de qualquer código. Use quando 
 ```text
 Leia app-pedidos/dados/vendas-pizzas.csv e gere app-pedidos/cardapio.json com cada pizza:
 nome, código (sabor_pizza sem o sufixo de tamanho), categoria, ingredientes e os tamanhos
-que existem com o preço de cada um. Mostre quantas pizzas encontrou e quais têm um só tamanho.
+que existem com o preço de cada um. Os preços vêm como texto ("R$ 66,25"): guarde como número. Mostre quantas pizzas encontrou e quais têm um só tamanho.
 ```
 
 Confira: são 32 pizzas. A Cinco Queijos só existe em G; a Mega Carne, só em P; a Quatro Queijos, em M e G; a Grega é a única com GG. E a "The Brie Carre Pizza" está em inglês, com ingredientes sem tradução: peça ao agente para traduzi-los no cardápio e anote isso na spec.
@@ -195,7 +195,7 @@ Confira: são 32 pizzas. A Cinco Queijos só existe em G; a Mega Carne, só em P
 - Dado um pedido vazio, quando ela toca em Finalizar, então vê um aviso e nada é salvo.
 - Dado um pedido finalizado, quando a página é recarregada, então o pedido continua na lista do dia.
 - Dado três pedidos finalizados, quando ela exporta, então o CSV tem uma linha por item,
-  com as colunas exatas de vendas-pizzas.csv, na mesma ordem.
+  com as colunas exatas de vendas-pizzas.csv, na mesma ordem e no mesmo formato (preços como "R$ 66,25").
 ```
 
 **Passo 3. Faça a revisão cruzada.** Abra uma conversa nova (de preferência com outro modelo) e use o prompt de revisão cruzada. Corrija a spec com o que fizer sentido. Faça commit: "spec do app de pedidos".
@@ -203,7 +203,7 @@ Confira: são 32 pizzas. A Cinco Queijos só existe em G; a Mega Carne, só em P
 **Passo 4. Plano e tarefas.**
 
 ```text
-/plan Leia app-pedidos/spec.md e app-pedidos/AGENTS.md. Escreva app-pedidos/plano.md
+Leia app-pedidos/spec.md e app-pedidos/AGENTS.md. Escreva app-pedidos/plano.md
 (tecnologia, arquivos, formato dos dados, telas) e app-pedidos/tarefas.md (tarefas pequenas
 com códigos T01, T02...). Mostre como cada critério de aceite será testado. Não implemente ainda.
 ```
@@ -228,7 +228,7 @@ Responda em tabela (critério | passou? | evidência) e anexe capturas de tela.
 
 ![Os projetos conversam entre si](imagens/f09-fluxo-dados.png)
 
-**Passo 8. Publique.** Cartão na página de projetos, commit e push. O app estará em `https://seuusuario.github.io/app-pedidos/`. Abra no celular e lance um pedido.
+**Passo 8. Publique.** Peça ao agente o cartão na página de projetos e a publicação no GitHub, com confirmação do endereço. O app estará em `https://seuusuario.github.io/app-pedidos/`. Abra no celular e lance um pedido.
 
 ## Checklist do projeto
 

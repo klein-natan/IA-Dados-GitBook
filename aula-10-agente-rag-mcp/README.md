@@ -8,7 +8,7 @@ Hoje você constrói esse agente para os seus próprios PDFs. Ele roda no seu co
 
 ## Do chat à API
 
-Até agora você usou a IA por aplicativos: o chat, o Antigravity. Por trás deles, existe uma porta de entrada para programas: a **API** (interface de programação).
+Até agora você usou a IA por aplicativos: o chat e os agentes. Por trás deles, existe uma porta de entrada para programas: a **API** (interface de programação).
 
 Pense num restaurante. O app de chat é o salão: mesa, cardápio bonito, garçom. A API é a janela da cozinha que atende pedidos de outros estabelecimentos: sem decoração, só o pedido escrito num formato combinado e o prato de volta. Seu programa escreve o pedido ("modelo tal, esta pergunta, estas instruções") e recebe o texto da resposta.
 
@@ -141,14 +141,14 @@ O **MCP** (*Model Context Protocol*) resolveu isso com um padrão aberto. A docu
 
 O MCP tem dois lados:
 
-* **clientes:** os aplicativos de IA (Antigravity, Claude, ChatGPT, VS Code e outros);
+* **clientes:** os aplicativos de IA (Antigravity, OpenCode, Cursor, Claude, ChatGPT, VS Code e outros);
 * **servidores:** pequenos programas que oferecem ferramentas e dados (arquivos, GitHub, Google Drive, banco de dados, calendário).
 
 Um servidor oferece três tipos de coisa: **ferramentas** (ações, como "criar evento na agenda"), **recursos** (dados para ler, como um arquivo) e **prompts** (modelos de instrução prontos). Faça um servidor uma vez e ele funciona em qualquer cliente.
 
 O MCP foi criado pela Anthropic no fim de 2024 e, em dezembro de 2025, passou para uma fundação ligada à Linux Foundation, com apoio de OpenAI, Google, Microsoft e outras empresas. Virou a tomada padrão do setor.
 
-No Antigravity, você instala servidores pela **MCP Store**: no editor, clique em **…** no topo do painel do agente e escolha **MCP Servers**. Para um servidor próprio, a configuração fica no arquivo `mcp_config.json` (global ou em `.agents/mcp_config.json`, só para o projeto).
+No Antigravity, você instala servidores pela **MCP Store**: no editor, clique em **…** no topo do painel do agente e escolha **MCP Servers**. Para um servidor próprio, a configuração fica no arquivo `mcp_config.json` (global ou em `.agents/mcp_config.json`, só para o projeto). O OpenCode e o Cursor também aceitam servidores MCP, configurados nas próprias configurações; o formato é parecido.
 
 {% hint style="warning" %}
 Um servidor MCP age em seu nome: lê seus arquivos, mexe no seu GitHub, envia mensagens. Instale só servidores de origem confiável e dê a eles o mínimo de acesso necessário. Tokens e senhas usados na configuração seguem a mesma regra da chave de API.
@@ -189,13 +189,15 @@ PDFs escaneados, planilhas, interface web (desafio extra).
 
 **Passo 1. Crie a conta e a chave.** Em openrouter.ai, crie a conta, vá em **Keys** e crie uma chave chamada `agente-aula`. Copie a chave e guarde: ela só aparece uma vez. Se a tela oferecer um limite de crédito para a chave, defina um valor baixo.
 
-**Passo 2. Crie a pasta fora do site.** Este projeto **não** fica no repositório do site. Crie `Documentos/projetos-ia/agente-docs/`, abra no Antigravity e peça:
+**Passo 2. Crie a pasta fora do site.** Este projeto **não** fica no repositório do site. Crie `Documentos/projetos-ia/agente-docs/`, abra no agente que preferir e peça:
 
 ```text
 Crie a estrutura deste projeto: pasta pdfs/, arquivo .env com a linha OPENROUTER_API_KEY=,
 arquivo .gitignore contendo .env e a pasta do índice, e inicie um repositório git.
 Não escreva a chave em nenhum lugar: eu mesmo vou colar no .env.
 ```
+
+Se quiser guardar o código no GitHub, peça ao agente um repositório **privado** com o `gh` e que confirme, antes do primeiro envio, que o `.env` não vai junto.
 
 Abra o `.env` e cole a sua chave depois do sinal de igual.
 
@@ -208,7 +210,7 @@ Abra o `.env` e cole a sua chave depois do sinal de igual.
 **Passo 6. Peça o plano.**
 
 ```text
-/plan Leia spec.md. Planeje um agente em Python que:
+Não altere nada ainda. Leia spec.md e planeje um agente em Python que:
 (1) lê os PDFs de pdfs/, divide em trechos com arquivo e página, calcula embeddings pela API
 do OpenRouter (https://openrouter.ai/api/v1/embeddings) e salva um índice local;
 (2) em um chat no terminal, busca os 4 trechos mais próximos de cada pergunta e chama o modelo
@@ -249,7 +251,7 @@ Essa última pergunta é o diagnóstico mais útil de um RAG. Erro na busca pede
 
 ## Desafio extra
 
-* **Transforme o seu agente num servidor MCP.** Peça ao Antigravity para expor a busca nos PDFs como ferramenta MCP (há bibliotecas prontas em Python), registre o servidor no `.agents/mcp_config.json` de outro projeto e faça o agente do Antigravity consultar os seus documentos.
+* **Transforme o seu agente num servidor MCP.** Peça ao seu agente para expor a busca nos PDFs como ferramenta MCP (há bibliotecas prontas em Python), registre o servidor nas configurações de MCP de um dos agentes (no Antigravity, `.agents/mcp_config.json`) e faça esse agente consultar os seus documentos.
 * Instale o servidor MCP do GitHub pela MCP Store e peça ao agente para listar os seus repositórios e abrir uma *issue* no repositório do site.
 * Crie uma interface web local (por exemplo, com Streamlit ou Gradio) para conversar com o agente fora do terminal.
 

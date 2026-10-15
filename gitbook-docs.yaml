@@ -1,0 +1,12 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: IA e Análise de Dados
+  structure:
+    - type: space
+      key: space-ia-dados
+      title: IA e Análise de Dados
+      path: aulas
+      default: true
+      content:
+        directory: ./
+        language: pt-br

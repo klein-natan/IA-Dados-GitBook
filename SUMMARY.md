@@ -15,6 +15,7 @@
 
 * [Antes da Aula 6 · Prepare o Seu Computador](ia-preparacao.md)
 * [Aula 6 · O Universo da IA e o Seu Site Pessoal](aula-06-universo-da-ia/README.md)
+  * [Catálogo de Ferramentas de IA](aula-06-universo-da-ia/ferramentas.md)
 * [Aula 7 · Relatório de Análise com IA](aula-07-relatorio-com-ia/README.md)
 * [Aula 8 · Agentes de IA e o Dashboard do Vitto](aula-08-agentes-e-dashboard/README.md)
 * [Aula 9 · Um App de Pedidos com Spec-Driven Development](aula-09-app-com-spec/README.md)

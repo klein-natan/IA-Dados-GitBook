@@ -4,47 +4,126 @@ Vitto abriu uma vaga de estágio e recebeu quarenta currículos. Trinta e oito e
 
 Hoje você publica o seu site. No caminho, vai entender o que é a IA generativa, por que ela erra, como esse universo se organiza e como pedir as coisas do jeito certo. Nas próximas aulas, cada projeto novo entra nesse site.
 
-## O que é IA generativa
+## IA, machine learning, deep learning e IA generativa
 
-Inteligência artificial é o nome do campo inteiro: programas que fazem tarefas que pareciam exigir uma pessoa. Dentro dele há camadas.
+Esses quatro nomes aparecem misturados em notícia, propaganda e conversa de corredor. Eles não são sinônimos. Cada um é uma camada dentro da anterior, como bonecas russas.
+
+![Da IA à IA generativa: cada camada fica dentro da anterior](imagens/anim-camadas-ia.gif)
+
+**Inteligência artificial** é o campo inteiro: qualquer programa que faz uma tarefa que parecia exigir uma pessoa. No começo, isso era feito com **regras escritas à mão**. Uma pessoa pensava em todos os casos e programava cada um.
+
+* No Vitto: "se for a décima pizza do cliente, dê 10% de desconto".
+* No dia a dia: o atendimento telefônico do banco ("digite 1 para saldo"), o GPS que calcula a rota mais curta, o computador que venceu o campeão mundial de xadrez em 1997.
+
+Regras funcionam quando o problema é claro. Falham quando ninguém consegue escrever a regra. Tente escrever regras para reconhecer uma pizza numa foto: cor, formato, borda... sempre aparece uma exceção.
+
+**Machine learning** (aprendizado de máquina) inverte o jogo. Em vez de escrever as regras, você mostra exemplos com as respostas certas, e o programa descobre as regras sozinho.
+
+![Programar regras ou aprender com exemplos?](imagens/f06-tradicional-ml.png)
+
+* No Vitto: mostrar ao computador os 358 dias de vendas e quantas pizzas saíram em cada um. Ele aprende a prever a próxima sexta-feira.
+* No dia a dia: o filtro de spam do e-mail, a recomendação de filmes do streaming, o banco que bloqueia uma compra suspeita no cartão, o score de crédito.
+
+**Deep learning** (aprendizado profundo) é um tipo de machine learning que usa **redes neurais** grandes: muitas camadas de "neurônios" artificiais empilhadas. Cada camada aprende algo um pouco mais complexo que a anterior.
 
 ```mermaid
 %%{init:{"theme":"base","themeVariables":{"fontFamily":"'Segoe UI',Inter,Helvetica,Arial,sans-serif","fontSize":"15px","primaryColor":"#F3F4F8","primaryTextColor":"#171A2B","primaryBorderColor":"#DFE2EA","lineColor":"#8C90A6","secondaryColor":"#E4E2FB","tertiaryColor":"#FFFFFF","clusterBkg":"#F7F8FB","clusterBorder":"#DFE2EA","edgeLabelBackground":"#FFFFFF"},"flowchart":{"nodeSpacing":28,"rankSpacing":38,"padding":14,"curve":"basis"}}}%%
 flowchart LR
-    A("<b>Inteligência artificial</b><br/><i>regras escritas por pessoas</i>") --> B("<b>Machine learning</b><br/><i>o programa aprende com exemplos</i>")
-    B --> C("<b>Deep learning</b><br/><i>redes neurais grandes</i>")
-    C --> D("<b>IA generativa</b><br/><i>cria texto, imagem, código</i>")
+    A("<b>Foto</b><br/><i>milhões de pontos coloridos</i>") --> B("<b>Camadas iniciais</b><br/><i>bordas e cores</i>")
+    B --> C("<b>Camadas do meio</b><br/><i>círculos, manchas de queijo</i>")
+    C --> D("<b>Camadas finais</b><br/><i>formas inteiras</i>")
+    D --> E("<b>Resposta</b><br/><i>é uma pizza!</i>")
+    classDef neutro fill:#F3F4F8,stroke:#DFE2EA,color:#171A2B;
     classDef claro fill:#E4E2FB,stroke:#C9C5F5,color:#171A2B;
     classDef medio fill:#B9B5F2,stroke:#A29DEB,color:#171A2B;
     classDef forte fill:#4F46E5,stroke:#4F46E5,color:#FFFFFF;
     classDef destaque fill:#2F2A8F,stroke:#2F2A8F,color:#FFFFFF;
-    class A claro
-    class B medio
-    class C forte
-    class D destaque
+    class A neutro
+    class B claro
+    class C medio
+    class D forte
+    class E destaque
 ```
 
-A diferença prática está no que o programa entrega. Um filtro de spam é machine learning: recebe um e-mail e **classifica** ("spam" ou "não spam"). O ChatGPT é IA generativa: recebe um pedido e **cria** um e-mail novo, que não existia antes.
+Ninguém programa "manchas de queijo". A rede descobre sozinha, olhando milhões de exemplos. O deep learning é o que fez a IA entender o que é difícil de descrever com regras: imagens, voz e linguagem.
 
-Na Aula 1 você viu a IA que classifica e prevê. A partir de agora, o foco é a que cria.
+* No dia a dia: o desbloqueio do celular pelo rosto, o assistente que entende o que você fala, o tradutor automático, o carro que lê placas de trânsito.
+
+**IA generativa** é deep learning que, em vez de só classificar ou prever, **cria algo novo**: texto, imagem, música, vídeo, código.
+
+* No Vitto: escrever a descrição de uma pizza nova para o cardápio, criar a arte da promoção de terça, montar o site da pizzaria.
+* No dia a dia: o ChatGPT escrevendo um e-mail, o Midjourney criando uma imagem, o Suno compondo uma música.
+
+| Camada | O que faz | Precisa de | Exemplo |
+| --- | --- | --- | --- |
+| Inteligência artificial (regras) | segue regras escritas por pessoas | alguém que conheça todos os casos | desconto na décima pizza |
+| Machine learning | aprende padrões a partir de exemplos | dados com as respostas certas | prever as vendas de sexta |
+| Deep learning | aprende padrões complexos com redes neurais | muitos dados e muito poder de computação | reconhecer a foto de uma pizza |
+| IA generativa | cria conteúdo novo | quantidades gigantes de texto, imagens e código | escrever o texto do cardápio |
+
+{% hint style="info" %}
+**Para não confundir:** toda IA generativa é deep learning, todo deep learning é machine learning, e todo machine learning é IA. O contrário não vale: a regra do desconto é IA, mas não aprende nada.
+{% endhint %}
 
 ## Como um modelo de linguagem funciona
 
-O coração do ChatGPT, do Claude e do Gemini é um **modelo de linguagem**. A ideia central cabe numa frase: ele escolhe a próxima palavra mais provável, depois a próxima, depois a próxima.
+O coração do ChatGPT, do Claude e do Gemini é um **modelo de linguagem**. A ideia central cabe numa frase: ele escolhe o próximo pedaço de texto mais provável, depois o próximo, depois o próximo.
 
-![Um modelo de linguagem escolhe a próxima palavra](imagens/f06-proximo-token.png)
+![O modelo escolhe o próximo pedaço, um de cada vez](imagens/anim-proximo-token.gif)
 
-Pense no autocompletar do celular, só que treinado com uma quantidade enorme de texto: livros, sites, código, conversas. Ao ler tanto, o modelo aprendeu padrões de gramática, de fatos e até de raciocínio. Quando você escreve "A pizza mais vendida do Vitto é a", ele calcula quais continuações soam mais prováveis e sorteia uma delas.
+Pense no autocompletar do celular, só que treinado com uma quantidade enorme de texto: livros, sites, código, conversas. Ao ler tanto, o modelo aprendeu padrões de gramática, de fatos e até de raciocínio. Quando você escreve "A pizza mais vendida do Vitto é a", ele calcula quais continuações soam mais prováveis, sorteia uma, cola no texto e repete.
 
 Esse sorteio explica uma coisa que confunde muita gente: **a mesma pergunta gera respostas diferentes**. Não é defeito. É o jeito como o modelo funciona.
-
-O modelo não lê palavras inteiras. Ele lê **tokens**, pedaços de palavra. "Pizza" pode ser um token só; "pizzaria" pode virar dois. Em português, cada token tem em média uns três ou quatro caracteres. Os tokens importam por dois motivos: eles definem quanto texto cabe numa conversa e, quando você usa a IA por API (Aula 10), definem quanto você paga.
 
 {% hint style="info" %}
 **Treino em duas etapas.** Primeiro o modelo lê bilhões de páginas e aprende a continuar textos. Depois, pessoas avaliam milhares de respostas ("esta é útil, esta não é") e o modelo aprende a conversar, seguir instruções e recusar pedidos perigosos.
 {% endhint %}
 
 O treino termina numa data. Tudo o que aconteceu depois é desconhecido para o modelo. Essa é a **data de corte**. Por isso os apps de chat ganharam busca na web: quando você pergunta algo recente, o app pesquisa e entrega o resultado para o modelo ler.
+
+## Tokenização: o texto vira pedaços numerados
+
+O modelo não lê letras nem palavras inteiras. Antes de tudo, um programa chamado **tokenizador** corta o texto em pedaços, os **tokens**, e troca cada pedaço por um número. O modelo só enxerga a sequência de números.
+
+![Tokenização: o texto vira pedaços numerados](imagens/anim-tokenizacao.gif)
+
+O exemplo da animação é real. É assim que o tokenizador usado pelos modelos da OpenAI corta a frase "A pizza mais vendida do Vitto é a":
+
+| Pedaço | `A` | ` pizza` | ` mais` | ` vend` | `ida` | ` do` | ` Vit` | `to` | ` é` | ` a` |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| Número | 32 | 27941 | 2899 | 10593 | 2261 | 621 | 27283 | 935 | 1212 | 261 |
+
+Repare em três coisas:
+
+* **O espaço faz parte do pedaço.** " pizza", com o espaço na frente, é um token diferente de "pizza" colado.
+* **Palavras comuns viram um token só; palavras raras viram vários.** "pizza" é um pedaço; "vendida" virou "vend" + "ida"; "Vitto", um nome que o tokenizador não conhece, virou "Vit" + "to".
+* **Português gasta mais tokens que inglês.** A frase acima tem 8 palavras e 10 tokens. "The best pizza in town" tem 5 palavras e 5 tokens. Os tokenizadores foram montados com muito mais texto em inglês.
+
+Por que isso importa para você?
+
+* **Custo:** pela API, paga-se por token (Aula 10). O mesmo texto em português sai um pouco mais caro.
+* **Limite:** a janela de contexto (veja abaixo) é medida em tokens, não em páginas.
+* **Erros curiosos:** como o modelo vê pedaços e não letras, ele pode errar perguntas como "quantas letras r tem a palavra *carrinho*?". Ele nunca viu as letras separadas.
+
+{% hint style="success" %}
+**Veja com os próprios olhos.** Ferramentas como o *Tokenizer* da OpenAI (platform.openai.com/tokenizer) mostram, em cores, como qualquer texto é cortado. Cole uma frase sua e compare com a mesma frase em inglês.
+{% endhint %}
+
+## Embeddings: um mapa de sentidos
+
+Tokens são só números de identificação: o 27941 ("pizza") não está "perto" do 27942 em sentido nenhum. Para o modelo entender significado, cada pedaço de texto ganha também um **embedding**: uma posição num mapa de sentidos.
+
+![Embeddings: um mapa de sentidos](imagens/anim-embeddings.gif)
+
+Pense num mapa de uma cidade, mas organizado por assunto. Textos com sentido parecido moram no mesmo bairro, mesmo sem nenhuma palavra em comum: "mussarela", "parmesão" e "fornecedor de queijo" ficam perto; "segunda-feira" e "sábado", em outro bairro; "preço" e "promoção", em outro.
+
+* **Busca por sentido:** perguntar "o queijo vai atrasar?" encontra o trecho "o fornecedor atrasou o pedido", mesmo sem a palavra "queijo". Uma busca por palavra-chave não acharia.
+* **Recomendação:** "quem comprou esta pizza também gostou de..." usa a mesma ideia: itens parecidos ficam perto.
+* **Na Aula 10:** o seu agente pessoal vai usar embeddings para encontrar, nos seus PDFs, os trechos que respondem à pergunta. Essa técnica se chama RAG.
+
+{% hint style="info" %}
+O mapa da animação tem duas dimensões para caber na tela. Os mapas reais têm centenas ou milhares de dimensões. Você não precisa imaginá-las: basta a ideia de que **perto no mapa é perto no sentido**.
+{% endhint %}
 
 ## Por que a IA inventa
 
@@ -68,7 +147,7 @@ Tudo o que o modelo considera ao responder precisa estar na **janela de contexto
 
 ![Janela de contexto: a mesa de trabalho do modelo](imagens/f06-contexto.png)
 
-A mesa é grande, mas tem limite. Numa conversa muito longa, as primeiras mensagens saem pela borda e o modelo "esquece" o que você combinou no começo. Isso tem duas consequências práticas:
+A mesa é grande, mas tem limite, medido em tokens. Os modelos mais novos aceitam por volta de um milhão de tokens, algo como alguns livros inteiros. Mesmo assim, numa conversa muito longa, o modelo presta menos atenção ao que ficou lá no começo. Isso tem duas consequências práticas:
 
 * **Assunto novo, conversa nova.** Uma conversa limpa, só com o que importa, dá respostas melhores do que uma conversa de duas horas sobre cinco temas.
 * **Cada conversa começa vazia.** O chat de ontem não sabe o que você disse hoje, a menos que o app tenha um recurso de memória ou você cole o contexto de novo.
@@ -79,14 +158,14 @@ Há centenas de ferramentas de IA, e os nomes mudam a cada poucos meses. Em vez 
 
 ![O universo da IA em camadas](imagens/f06-universo.png)
 
-**Base.** Tudo começa com dados, chips e treino. Treinar um modelo grande custa centenas de milhões de dólares, por isso poucas empresas fazem isso: OpenAI, Anthropic, Google, Meta, xAI, Mistral, DeepSeek, Alibaba e algumas outras.
+**Base.** Tudo começa com dados, chips e treino. Treinar um modelo grande custa centenas de milhões de dólares, por isso poucas empresas fazem isso: OpenAI, Anthropic, Google, Meta, SpaceXAI (dona do Grok), Mistral, DeepSeek, Alibaba e algumas outras.
 
 **Modelos.** O resultado do treino é um modelo. Ele pode ser **fechado** ou ter **pesos abertos**.
 
-* Um modelo fechado (GPT, Claude, Gemini) só pode ser usado pelos apps e pela API da empresa. Você nunca tem o arquivo do modelo.
-* Um modelo de pesos abertos (Llama, Gemma, DeepSeek, Qwen, Mistral) pode ser baixado e rodado em qualquer computador potente. Uma empresa preocupada com sigilo pode rodá-lo nos próprios servidores, sem mandar dado nenhum para fora.
+* Um modelo fechado (GPT, Claude, Gemini, Grok) só pode ser usado pelos apps e pela API da empresa. Você nunca tem o arquivo do modelo.
+* Um modelo de pesos abertos (DeepSeek, Kimi, GLM, Qwen, Llama, Gemma) pode ser baixado e rodado em qualquer computador potente. Uma empresa preocupada com sigilo pode rodá-lo nos próprios servidores, sem mandar dado nenhum para fora.
 
-**Tipos de modelo.** Há modelos para texto e código, modelos de **raciocínio** (que "pensam" por alguns segundos ou minutos antes de responder e acertam mais em problemas difíceis), modelos de imagem, áudio e vídeo e modelos de **embeddings**, que você vai conhecer na Aula 10.
+**Tipos de modelo.** Há modelos para texto e código, modelos de **raciocínio** (que "pensam" por alguns segundos ou minutos antes de responder e acertam mais em problemas difíceis), modelos de imagem, áudio e vídeo e modelos de **embeddings**, que fazem o mapa de sentidos.
 
 **Formas de usar.** É aqui que você entra.
 
@@ -98,8 +177,60 @@ Há centenas de ferramentas de IA, e os nomes mudam a cada poucos meses. Em vez 
 | API | um programa seu conversa com o modelo | um robô que responde clientes no WhatsApp |
 | Modelo local | o modelo roda no seu computador, sem internet | analisar dados sigilosos sem enviá-los a ninguém |
 
+O [Catálogo de ferramentas de IA](ferramentas.md) mostra quase 50 ferramentas, comerciais e abertas, organizadas por tarefa: conversa, pesquisa, programação, imagem, vídeo, áudio, design e automação.
+
 {% hint style="success" %}
 **Usuário avançado escolhe a ferramenta pela tarefa.** Pergunta rápida: chat. Pesquisa com fontes: chat com busca na web ou "pesquisa aprofundada". Trabalho sobre arquivos e código: agente. Dado sigiloso: modelo local ou plano empresarial que não treina com seus dados.
+{% endhint %}
+
+## Os modelos e seus desempenhos
+
+Cada empresa lança **famílias** de modelos, em tamanhos diferentes. Os maiores acertam mais e custam mais; os menores são rápidos e baratos.
+
+| Empresa | Modelos (outubro de 2026) | Como a família se divide |
+| --- | --- | --- |
+| Anthropic | Claude Opus 5.5, Claude Sonnet 5.5, Claude Haiku 5.5 | Opus é o maior; Sonnet equilibra qualidade e custo; Haiku é o mais rápido e barato |
+| OpenAI | GPT-6 (variantes como Astra e Sol); gpt-oss (pesos abertos) | os modelos GPT ficam no ChatGPT e na API; os gpt-oss podem ser baixados |
+| Google | Gemini 4 (como o Argon), Gemini 3.5 Flash-Lite; Gemma 4 (pesos abertos) | o Flash-Lite é rápido e barato; o Gemma roda até em computadores comuns |
+| SpaceXAI | Grok 4.7 | modelo do Grok, integrado ao X |
+| Meta | Muse; Llama 4 (pesos abertos) | o Llama popularizou os modelos de pesos abertos |
+| Chinesas | DeepSeek V4, Kimi K3 (Moonshot AI), GLM-5.3 (Z AI), MiMo (Xiaomi), Qwen 3.7 (Alibaba) | quase todas publicam pesos abertos, com preços muito baixos |
+| Mistral (França) | Mistral Large 4 (prévia), Mistral Small 4 | a principal empresa europeia |
+
+Como saber qual modelo é "melhor"? Laboratórios independentes aplicam a mesma bateria de provas a todos os modelos, como um ENEM de IA: questões de raciocínio, matemática, ciência, programação e uso de ferramentas. A **Artificial Analysis** resume essas provas num índice de inteligência:
+
+![Quem são os modelos e como se saem](imagens/f06-modelos.png)
+
+Três leituras do gráfico:
+
+* **Os fechados lideram, mas os abertos estão perto.** O melhor modelo de pesos abertos (MiMo, da Xiaomi) fica a 12 pontos do líder, custando cerca de 45 vezes menos por tarefa.
+* **Maior nem sempre compensa.** O Claude Haiku 5.5 faz 43 pontos com custo de US\$ 0,21 por tarefa; o Opus faz 58 com US\$ 5,98. Para resumir um e-mail, o pequeno basta.
+* **Modelos antigos envelhecem rápido.** O Llama 4, que foi destaque em 2025, hoje fica no fim da lista. Em IA, um ano é muito tempo.
+
+{% hint style="warning" %}
+Ranking não é tudo. Um modelo pode ir muito bem na prova e mal na **sua** tarefa. Os rankings mudam a cada poucos meses: consulte a fonte atualizada (artificialanalysis.ai e lmarena.ai, onde pessoas votam às cegas na melhor resposta) e, sobretudo, teste com os seus próprios exemplos. Na Aula 10, você vai aprender a montar esse teste.
+{% endhint %}
+
+## Os conectores: OpenRouter, Composio e companhia
+
+Entre os modelos e as ferramentas que você usa, existe uma camada de serviços que conecta as peças. Você vai ouvir esses nomes o tempo todo.
+
+![Os conectores do universo da IA](imagens/f06-ecossistema.png)
+
+**Do lado dos modelos (de onde vem a inteligência):**
+
+* <img src="imagens/logos/openrouter.png" alt="OpenRouter" data-size="line"> **OpenRouter** é um balcão único para modelos. Em vez de abrir conta e pagar separado na OpenAI, na Anthropic, no Google e em dezenas de outras, você usa **uma chave** e escolhe entre centenas de modelos, inclusive alguns gratuitos. Trocar de modelo vira trocar um nome. Você vai usá-lo na Aula 10.
+* <img src="imagens/logos/huggingface.png" alt="Hugging Face" data-size="line"> **Hugging Face** é a grande biblioteca dos modelos abertos. Quase todo modelo de pesos abertos é publicado lá, com dados de treino, demonstrações e documentação. É o "GitHub da IA".
+* <img src="imagens/logos/ollama.png" alt="Ollama" data-size="line"> **Ollama** e <img src="imagens/logos/lmstudio.png" alt="LM Studio" data-size="line"> **LM Studio** baixam um modelo aberto e o rodam no seu computador, sem internet e sem enviar dados a ninguém. Modelos pequenos rodam até em notebooks comuns.
+
+**Do lado das ferramentas (o que o agente consegue fazer):**
+
+* <img src="imagens/logos/composio.png" alt="Composio" data-size="line"> **Composio** dá a um agente acesso a mais de 1.500 aplicativos, como Gmail, Google Agenda, Slack e planilhas, cuidando dos logins com segurança. Com ele, um agente pode, por exemplo, ler os e-mails de fornecedores e marcar uma reunião na sua agenda. O plano gratuito permite 100 mil ações por mês (outubro de 2026).
+* <img src="imagens/logos/n8n.png" alt="n8n" data-size="line"> **n8n**, <img src="imagens/logos/zapier.png" alt="Zapier" data-size="line"> **Zapier** e <img src="imagens/logos/make.png" alt="Make" data-size="line"> **Make** montam automações do tipo "quando acontecer isto, faça aquilo": quando chegar um pedido pelo formulário, registre na planilha e avise no WhatsApp. Hoje todos têm passos com IA no meio do fluxo. O n8n pode ser instalado nos seus próprios servidores.
+* **MCP** é o padrão que liga ferramentas a qualquer agente, como uma tomada USB-C. Você vai conhecê-lo na Aula 10.
+
+{% hint style="info" %}
+Uma forma simples de lembrar: **OpenRouter escolhe o cérebro; Composio e MCP dão as mãos.** Um agente útil precisa dos dois.
 {% endhint %}
 
 ## Três agentes: Antigravity, OpenCode e Cursor
@@ -314,6 +445,10 @@ Anomaly. (2026). *OpenCode documentation*. https://opencode.ai/docs
 
 Anthropic. (2024). *Building effective agents*. Anthropic Engineering. https://www.anthropic.com/engineering/building-effective-agents
 
+Artificial Analysis. (2026). *LLM leaderboard: Comparison of AI models* [consulta em 16 out. 2026]. https://artificialanalysis.ai/leaderboards/models
+
+Composio. (2026). *Composio*. https://composio.dev
+
 Cursor. (2026). *Rules*. Cursor Docs. https://cursor.com/docs/context/rules
 
 Delimarsky, D. (2025). *Spec-driven development with AI: Get started with a new open source toolkit*. The GitHub Blog. https://github.blog/ai-and-ml/generative-ai/spec-driven-development-with-ai-get-started-with-a-new-open-source-toolkit/
@@ -329,6 +464,12 @@ Google. (2026). *Implementation plan*. Google Antigravity Documentation. https:/
 Google. (2026). *Plans*. Google Antigravity Documentation. https://antigravity.google/docs/plans
 
 Google. (2026). *Prompt design strategies*. Gemini API Documentation. https://ai.google.dev/gemini-api/docs/prompting-strategies
+
+LMArena. (2026). *LMArena leaderboard*. https://lmarena.ai
+
+OpenAI. (2026). *tiktoken* [Biblioteca de software, tokenizador o200k_base]. https://github.com/openai/tiktoken
+
+OpenRouter. (2026). *OpenRouter documentation*. https://openrouter.ai/docs
 
 xAI. (2026, 12 de outubro). *Introducing The X Subscription*. https://x.ai/news/x-subscription
 

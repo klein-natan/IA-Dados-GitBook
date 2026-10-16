@@ -54,6 +54,17 @@ Ninguém programa "manchas de queijo". A rede descobre sozinha, olhando milhões
 * No Vitto: escrever a descrição de uma pizza nova para o cardápio, criar a arte da promoção de terça, montar o site da pizzaria.
 * No dia a dia: o ChatGPT escrevendo um e-mail, o Midjourney criando uma imagem, o Suno compondo uma música.
 
+A IA generativa já cria praticamente qualquer tipo de conteúdo:
+
+| Conteúdo | Ferramentas conhecidas | Exemplo no Vitto |
+| --- | --- | --- |
+| Texto | <img src="imagens/logos/chatgpt.png" alt="ChatGPT" data-size="line"> ChatGPT, <img src="imagens/logos/claude.png" alt="Claude" data-size="line"> Claude, <img src="imagens/logos/gemini.png" alt="Gemini" data-size="line"> Gemini | descrição das pizzas novas do cardápio |
+| Imagem | <img src="imagens/logos/midjourney.png" alt="Midjourney" data-size="line"> Midjourney, <img src="imagens/logos/firefly.png" alt="Adobe Firefly" data-size="line"> Adobe Firefly, <img src="imagens/logos/ideogram.png" alt="Ideogram" data-size="line"> Ideogram | arte da promoção de terça-feira |
+| Vídeo | <img src="imagens/logos/veo.png" alt="Veo" data-size="line"> Veo, <img src="imagens/logos/runway.png" alt="Runway" data-size="line"> Runway, <img src="imagens/logos/heygen.png" alt="HeyGen" data-size="line"> HeyGen | vídeo curto da pizza saindo do forno |
+| Voz | <img src="imagens/logos/elevenlabs.png" alt="ElevenLabs" data-size="line"> ElevenLabs, <img src="imagens/logos/speechify.png" alt="Speechify" data-size="line"> Speechify | locução para o anúncio no rádio |
+| Música | <img src="imagens/logos/suno.png" alt="Suno" data-size="line"> Suno, <img src="imagens/logos/stable-audio.png" alt="Stable Audio" data-size="line"> Stable Audio | jingle da pizzaria |
+| Código | <img src="imagens/logos/cursor.png" alt="Cursor" data-size="line"> Cursor, <img src="imagens/logos/antigravity.png" alt="Antigravity" data-size="line"> Antigravity, <img src="imagens/logos/opencode.png" alt="OpenCode" data-size="line"> OpenCode | o site e o app de pedidos (Aulas 6 e 9) |
+
 | Camada | O que faz | Precisa de | Exemplo |
 | --- | --- | --- | --- |
 | Inteligência artificial (regras) | segue regras escritas por pessoas | alguém que conheça todos os casos | desconto na décima pizza |
@@ -67,23 +78,25 @@ Ninguém programa "manchas de queijo". A rede descobre sozinha, olhando milhões
 
 ## Como um modelo de linguagem funciona
 
-O coração do ChatGPT, do Claude e do Gemini é um **modelo de linguagem**. A ideia central cabe numa frase: ele escolhe o próximo pedaço de texto mais provável, depois o próximo, depois o próximo.
+O coração do ChatGPT, do Claude e do Gemini é um **modelo de linguagem**. A ideia central cabe numa frase: ele escolhe o próximo pedaço de texto, depois o próximo, depois o próximo.
 
-![O modelo escolhe o próximo pedaço, um de cada vez](imagens/anim-proximo-token.gif)
+Pense no autocompletar do celular, só que treinado com uma quantidade enorme de texto: livros, sites, código, conversas. Ao ler tanto, o modelo aprendeu padrões de gramática, de fatos e até de raciocínio.
 
-Pense no autocompletar do celular, só que treinado com uma quantidade enorme de texto: livros, sites, código, conversas. Ao ler tanto, o modelo aprendeu padrões de gramática, de fatos e até de raciocínio. Quando você escreve "A pizza mais vendida do Vitto é a", ele calcula quais continuações soam mais prováveis, sorteia uma, cola no texto e repete.
+O detalhe que muda tudo: o modelo **não devolve uma palavra**. Ele devolve uma **chance para cada pedaço de texto que conhece**. O conjunto de pedaços que ele conhece se chama **vocabulário** e, nos modelos atuais, tem por volta de 200 mil itens. Para "A pizza mais vendida do Vitto é a", o modelo calcula uma chance para cada um dos 200 mil: "Especial" fica com 46%, "Tropical" com 21%, "abacaxi" com 0,02%, "bicicleta" com quase zero. Todas as chances juntas somam 100%.
 
-Esse sorteio explica uma coisa que confunde muita gente: **a mesma pergunta gera respostas diferentes**. Não é defeito. É o jeito como o modelo funciona.
+![A saída do modelo: uma chance para cada token](imagens/anim-proximo-token.gif)
+
+Depois, o programa **sorteia** um pedaço, dando mais chance aos mais prováveis, cola esse pedaço no texto e recalcula tudo para o próximo. Uma resposta de uma página é o resultado de centenas dessas rodadas.
+
+O sorteio explica uma coisa que confunde muita gente: **a mesma pergunta gera respostas diferentes**. Não é defeito. É o jeito como o modelo funciona.
 
 {% hint style="info" %}
-**Treino em duas etapas.** Primeiro o modelo lê bilhões de páginas e aprende a continuar textos. Depois, pessoas avaliam milhares de respostas ("esta é útil, esta não é") e o modelo aprende a conversar, seguir instruções e recusar pedidos perigosos.
+**Temperatura** é o botão que controla esse sorteio. Com temperatura baixa, o modelo escolhe quase sempre o mais provável: respostas previsíveis, boas para extrair dados ou fazer contas. Com temperatura alta, ele arrisca mais: respostas variadas, boas para ideias e textos criativos. Os apps de chat escolhem por você; pela API (Aula 10), você escolhe.
 {% endhint %}
-
-O treino termina numa data. Tudo o que aconteceu depois é desconhecido para o modelo. Essa é a **data de corte**. Por isso os apps de chat ganharam busca na web: quando você pergunta algo recente, o app pesquisa e entrega o resultado para o modelo ler.
 
 ## Tokenização: o texto vira pedaços numerados
 
-O modelo não lê letras nem palavras inteiras. Antes de tudo, um programa chamado **tokenizador** corta o texto em pedaços, os **tokens**, e troca cada pedaço por um número. O modelo só enxerga a sequência de números.
+Os pedaços do vocabulário se chamam **tokens**. Antes de tudo, um programa chamado **tokenizador** corta o seu texto em tokens e troca cada um por um número. O modelo só enxerga a sequência de números.
 
 ![Tokenização: o texto vira pedaços numerados](imagens/anim-tokenizacao.gif)
 
@@ -102,28 +115,84 @@ Repare em três coisas:
 Por que isso importa para você?
 
 * **Custo:** pela API, paga-se por token (Aula 10). O mesmo texto em português sai um pouco mais caro.
-* **Limite:** a janela de contexto (veja abaixo) é medida em tokens, não em páginas.
+* **Limite:** a janela de contexto (mais abaixo) é medida em tokens, não em páginas.
 * **Erros curiosos:** como o modelo vê pedaços e não letras, ele pode errar perguntas como "quantas letras r tem a palavra *carrinho*?". Ele nunca viu as letras separadas.
 
 {% hint style="success" %}
 **Veja com os próprios olhos.** Ferramentas como o *Tokenizer* da OpenAI (platform.openai.com/tokenizer) mostram, em cores, como qualquer texto é cortado. Cole uma frase sua e compare com a mesma frase em inglês.
 {% endhint %}
 
-## Embeddings: um mapa de sentidos
+## Embeddings: o sentido vira uma lista de números
 
-Tokens são só números de identificação: o 27941 ("pizza") não está "perto" do 27942 em sentido nenhum. Para o modelo entender significado, cada pedaço de texto ganha também um **embedding**: uma posição num mapa de sentidos.
+O número de um token é só uma etiqueta: o 27941 ("pizza") não está "perto" do 27942 em sentido nenhum. Para trabalhar com significado, o modelo transforma cada pedaço de texto num **embedding**: uma **lista de números**, também chamada de **vetor**.
 
-![Embeddings: um mapa de sentidos](imagens/anim-embeddings.gif)
+| Texto | Embedding (início da lista; valores ilustrativos) |
+| --- | --- |
+| mussarela | `[ 0,21  -0,83   0,47   0,05  …  -0,12 ]` |
+| parmesão | `[ 0,19  -0,79   0,52   0,02  …  -0,15 ]` |
+| segunda-feira | `[-0,64   0,33  -0,08   0,91  …   0,40 ]` |
 
-Pense num mapa de uma cidade, mas organizado por assunto. Textos com sentido parecido moram no mesmo bairro, mesmo sem nenhuma palavra em comum: "mussarela", "parmesão" e "fornecedor de queijo" ficam perto; "segunda-feira" e "sábado", em outro bairro; "preço" e "promoção", em outro.
+Cada lista real tem centenas ou milhares de números; o modelo de embeddings gratuito que você vai usar na Aula 10 gera 1.024 números para cada trecho. Ninguém escolhe esses números à mão: o modelo os aprende no treino. O que importa é a regra: **listas parecidas significam sentidos parecidos**. As listas de "mussarela" e "parmesão" quase se repetem; a de "segunda-feira" é bem diferente.
+
+![Embeddings: cada texto vira uma lista de números](imagens/anim-embeddings.gif)
+
+Se você pegar dois números de cada lista e usar como coordenadas, dá para desenhar um mapa. Nele, textos com sentido parecido moram no mesmo bairro, mesmo sem nenhuma palavra em comum: "mussarela", "parmesão" e "fornecedor de queijo" ficam perto; "segunda-feira" e "sábado", em outro bairro; "preço" e "promoção", em outro.
 
 * **Busca por sentido:** perguntar "o queijo vai atrasar?" encontra o trecho "o fornecedor atrasou o pedido", mesmo sem a palavra "queijo". Uma busca por palavra-chave não acharia.
 * **Recomendação:** "quem comprou esta pizza também gostou de..." usa a mesma ideia: itens parecidos ficam perto.
 * **Na Aula 10:** o seu agente pessoal vai usar embeddings para encontrar, nos seus PDFs, os trechos que respondem à pergunta. Essa técnica se chama RAG.
 
+## Pré-treinamento e ajuste fino
+
+Um modelo como o Claude ou o GPT passa por duas grandes fases de treino.
+
+![Como um modelo de linguagem é treinado](imagens/f06-treino.png)
+
+**Pré-treinamento.** O modelo lê trilhões de tokens de sites, livros, artigos e código, sempre com o mesmo exercício: adivinhar o próximo token e corrigir o erro. É a fase mais cara: meses de trabalho de milhares de chips. O resultado é um **modelo base**, que sabe muito sobre a língua e o mundo, mas só completa textos. Pergunte "qual a capital da França?" a um modelo base e ele pode continuar com "e qual a capital da Itália?", como se fosse uma lista de exercícios.
+
+**Ajuste fino** (*fine-tuning*). É um treino extra, bem menor, com dados escolhidos a dedo para ensinar um comportamento. Ele tem várias formas, e os modelos de chat passam por quase todas:
+
+* **Por instruções.** Pessoas escrevem milhares de exemplos de "pedido → boa resposta". O modelo aprende a conversar, seguir pedidos e responder no formato certo.
+* **Por preferências.** Pessoas recebem duas respostas para o mesmo pedido e marcam a melhor. O modelo aprende o que é mais útil, claro e seguro, e a recusar pedidos perigosos. As siglas que você vai ver são RLHF (*reforço com retorno humano*) e DPO.
+* **Por reforço com gabarito.** O modelo tenta resolver problemas cuja resposta pode ser conferida automaticamente, como contas de matemática ou programas que precisam passar em testes. Acertou, ganha ponto; errou, perde. É assim que nascem os **modelos de raciocínio** (mais abaixo).
+* **Especializado.** Uma empresa pega um modelo pronto e o ajusta com os próprios dados: contratos de um escritório, conversas do atendimento, linguagem médica. Técnicas leves, como a **LoRA**, mudam só uma pequena parte do modelo, o que deixa esse ajuste barato.
+
 {% hint style="info" %}
-O mapa da animação tem duas dimensões para caber na tela. Os mapas reais têm centenas ou milhares de dimensões. Você não precisa imaginá-las: basta a ideia de que **perto no mapa é perto no sentido**.
+Outra técnica comum é a **destilação**: um modelo grande responde a milhões de perguntas e um modelo pequeno é treinado para imitar essas respostas. Muitos modelos rápidos e baratos nascem assim.
 {% endhint %}
+
+## Parâmetros: o tamanho do modelo
+
+Tudo o que um modelo aprendeu fica guardado em números chamados **parâmetros** (ou pesos). Pense neles como bilhões de botões de regulagem: o treino gira cada botão um pouquinho, trilhões de vezes, até o modelo acertar o próximo token com frequência.
+
+Quando você lê "um modelo de 8 bilhões de parâmetros", significa um arquivo com 8 bilhões desses números. Os tamanhos variam muito:
+
+| Tamanho | Parâmetros | Onde roda | Exemplos |
+| --- | --- | --- | --- |
+| Pequeno | 1 a 30 bilhões | notebook comum, até celular | Gemma 4 (12B e 31B) |
+| Médio | 30 a 200 bilhões | um computador com placa de vídeo potente | gpt-oss-120b |
+| Grande | centenas de bilhões a mais de um trilhão | centros de dados com muitos chips | os maiores modelos abertos e fechados |
+
+*"B" vem de* billion*, bilhão em inglês: 12B são 12 bilhões. As empresas de modelos fechados, como Anthropic, OpenAI e Google, não divulgam o tamanho dos seus.*
+
+Mais parâmetros dão espaço para mais conhecimento, mas não garantem um modelo melhor. A qualidade dos dados e do ajuste fino pesa tanto quanto o tamanho. Por isso modelos novos e menores muitas vezes superam modelos antigos e maiores, como você viu no gráfico de desempenho.
+
+{% hint style="success" %}
+**Por que isso interessa a um usuário:** o tamanho diz onde o modelo pode rodar. Um modelo pequeno, comprimido (técnica chamada **quantização**), cabe na memória de um notebook comum e roda sem internet, com o Ollama ou o LM Studio. É a saída para analisar dados sigilosos sem mandá-los para ninguém.
+{% endhint %}
+
+## Mistura de especialistas (MoE)
+
+Os maiores modelos de hoje quase sempre usam uma arquitetura chamada **mistura de especialistas** (*Mixture of Experts*, ou **MoE**). Em vez de um bloco único que trabalha inteiro para cada token, o modelo tem vários "especialistas" e um **roteador**. Para cada token, o roteador escolhe só alguns especialistas, e o resto descansa.
+
+![Mistura de especialistas (MoE)](imagens/anim-moe.gif)
+
+Pense num hospital grande: há dezenas de especialistas, mas cada paciente passa só por dois ou três, escolhidos na triagem. O hospital "sabe" muito, e cada consulta custa pouco.
+
+Você reconhece um modelo MoE pelo nome, que costuma trazer dois números: o total de parâmetros e quantos trabalham em cada token. O **Gemma 4 26B A4B**, do Google, tem 26 bilhões de parâmetros e ativa 4 bilhões por token ("A" de *active*, ativo). Na prática:
+
+* **Vantagem:** o conhecimento de um modelo grande, com a velocidade e o custo de um pequeno.
+* **Cuidado:** todos os especialistas precisam estar na memória, mesmo os que descansam. Um MoE é rápido, mas não é leve.
 
 ## Por que a IA inventa
 
@@ -143,14 +212,56 @@ Três atitudes reduzem o problema:
 
 ## Janela de contexto: a mesa de trabalho
 
-Tudo o que o modelo considera ao responder precisa estar na **janela de contexto**. Imagine uma mesa de trabalho. Em cima dela estão as instruções, a conversa até aqui, os arquivos que você anexou e os resultados das ferramentas. O que não está na mesa, o modelo não vê.
+Tudo o que o modelo considera ao responder precisa estar na **janela de contexto**. Imagine uma mesa de trabalho. Em cima dela estão as instruções, a conversa até aqui, os arquivos que você anexou, os resultados das ferramentas e a própria resposta que o modelo está escrevendo. O que não está na mesa, o modelo não vê.
 
 ![Janela de contexto: a mesa de trabalho do modelo](imagens/f06-contexto.png)
 
-A mesa é grande, mas tem limite, medido em tokens. Os modelos mais novos aceitam por volta de um milhão de tokens, algo como alguns livros inteiros. Mesmo assim, numa conversa muito longa, o modelo presta menos atenção ao que ficou lá no começo. Isso tem duas consequências práticas:
+O tamanho da mesa é medido em tokens. Em outubro de 2026, os tamanhos mais comuns eram estes:
+
+| Modelo | Janela de contexto | Equivale a mais ou menos |
+| --- | --- | --- |
+| Claude Opus 5.5, GPT-6 Astra, Gemini 4 Argon, Kimi K3 | cerca de 1 milhão de tokens | 1.500 páginas de texto em português |
+| Grok 4.7 | 500 mil tokens | 750 páginas |
+| Gemma 4 (pesos abertos) | 256 mil tokens | 380 páginas |
+| gpt-oss-120b (pesos abertos) | 131 mil tokens | 200 páginas |
+| Llama 4 Scout (pesos abertos) | até 10 milhões de tokens | uma pequena biblioteca |
+
+*Fonte: Artificial Analysis, outubro de 2026. As páginas são uma estimativa para texto corrido em português.*
+
+Três cuidados práticos:
+
+* **A resposta também ocupa a mesa.** Pedir um texto longo gasta espaço. Os modelos também têm um limite separado, e bem menor, para o tamanho de cada resposta.
+* **Mesa cheia, atenção dispersa.** Mesmo com um milhão de tokens disponíveis, o modelo presta menos atenção ao que está perdido no meio de um texto enorme. Mandar só o que importa dá respostas melhores. É por isso que existe o RAG (Aula 10).
+* **Mesa cheia custa caro.** Pela API, cada token na mesa é pago a cada nova mensagem. Uma conversa longa fica mais cara a cada rodada.
+
+Duas consequências para o dia a dia:
 
 * **Assunto novo, conversa nova.** Uma conversa limpa, só com o que importa, dá respostas melhores do que uma conversa de duas horas sobre cinco temas.
 * **Cada conversa começa vazia.** O chat de ontem não sabe o que você disse hoje, a menos que o app tenha um recurso de memória ou você cole o contexto de novo.
+
+## Raciocínio: o modelo que escreve antes de responder
+
+Um **modelo de raciocínio** é um modelo treinado (com o reforço com gabarito que você viu acima) para **escrever um rascunho antes da resposta final**. Nesse rascunho, ele quebra o problema em partes, testa um caminho, percebe um erro, volta e tenta outro. Só depois escreve a resposta que você lê.
+
+É importante entender o que isso é e o que não é:
+
+* **É texto.** O "pensamento" é feito dos mesmos tokens de sempre, gerados um a um. Muitos apps mostram um resumo desse rascunho; o restante fica escondido.
+* **Custa tokens e tempo.** Os tokens do rascunho são cobrados como os da resposta e demoram para ser gerados. Um problema difícil pode consumir dezenas de milhares de tokens de raciocínio.
+* **Não é pensamento humano.** O modelo não "entende" como uma pessoa. Escrever os passos intermediários simplesmente aumenta muito a chance de chegar à resposta certa, do mesmo jeito que fazer a conta no papel ajuda você.
+
+Muitos modelos deixam escolher o **esforço de raciocínio**: baixo, médio, alto, máximo. Os números da Artificial Analysis (outubro de 2026) mostram o efeito no mesmo modelo, o Claude Opus 5.5:
+
+| Esforço | Índice de inteligência | Custo por tarefa | Tempo até começar a responder |
+| --- | --- | --- | --- |
+| alto | 54 | US\$ 1,82 | 46 segundos |
+| muito alto | 56 | US\$ 3,46 | 2 minutos |
+| máximo | 58 | US\$ 5,98 | 11 minutos |
+
+Mais esforço acerta mais, mas custa mais e demora muito mais. Em outros modelos a diferença é ainda maior: o Kimi K3 faz 30 pontos no esforço baixo e 44 no máximo.
+
+{% hint style="success" %}
+**Quando usar raciocínio:** problemas com várias etapas, como planejar uma análise, resolver uma conta, depurar um código ou comparar opções com muitos critérios. **Quando dispensar:** resumir um e-mail, traduzir uma frase, mudar a cor de um botão. Nesses casos, o raciocínio só gasta tempo e dinheiro.
+{% endhint %}
 
 ## O universo da IA em camadas
 
@@ -177,7 +288,7 @@ Há centenas de ferramentas de IA, e os nomes mudam a cada poucos meses. Em vez 
 | API | um programa seu conversa com o modelo | um robô que responde clientes no WhatsApp |
 | Modelo local | o modelo roda no seu computador, sem internet | analisar dados sigilosos sem enviá-los a ninguém |
 
-O [Catálogo de ferramentas de IA](ferramentas.md) mostra quase 50 ferramentas, comerciais e abertas, organizadas por tarefa: conversa, pesquisa, programação, imagem, vídeo, áudio, design e automação.
+O [Catálogo de ferramentas de IA](ferramentas.md) mostra quase 60 ferramentas, comerciais e abertas, organizadas por tarefa: conversa, pesquisa, programação, imagem, vídeo, áudio, design e automação.
 
 {% hint style="success" %}
 **Usuário avançado escolhe a ferramenta pela tarefa.** Pergunta rápida: chat. Pesquisa com fontes: chat com busca na web ou "pesquisa aprofundada". Trabalho sobre arquivos e código: agente. Dado sigiloso: modelo local ou plano empresarial que não treina com seus dados.

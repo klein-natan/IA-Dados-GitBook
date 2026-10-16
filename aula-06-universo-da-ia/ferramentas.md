@@ -68,6 +68,9 @@ Situação em outubro de 2026. Ferramentas de IA mudam de nome, de dono e de pre
 | <img src="imagens/logos/runway.png" alt="Runway" data-size="line"> **Runway** | Runway | Comercial | Estúdio de vídeo com IA: gera cenas, troca fundos, remove objetos e cria efeitos. Usado em publicidade e cinema. |
 | <img src="imagens/logos/kling.png" alt="Kling" data-size="line"> **Kling** | Kuaishou | Comercial | Gerador de vídeo chinês conhecido por movimentos realistas de pessoas e câmera. |
 | <img src="imagens/logos/heygen.png" alt="HeyGen" data-size="line"> **HeyGen** | HeyGen | Comercial | Cria vídeos com avatares que falam a partir de um texto e traduz vídeos com dublagem e sincronia dos lábios. Comum em treinamentos e marketing. |
+| <img src="imagens/logos/synthesia.png" alt="Synthesia" data-size="line"> **Synthesia** | Synthesia | Comercial | Vídeos de treinamento e comunicação interna com apresentadores virtuais em dezenas de línguas, feitos a partir de um roteiro ou de slides. Muito usado por RH e times de vendas. |
+| <img src="imagens/logos/capcut.png" alt="CapCut" data-size="line"> **CapCut** | ByteDance | Comercial | Editor de vídeo para redes sociais com legendas automáticas, remoção de fundo, efeitos e narração gerados por IA. |
+| <img src="imagens/logos/opusclip.png" alt="OpusClip" data-size="line"> **OpusClip** | OpusClip | Comercial | Recorta um vídeo longo (aula, live, podcast) em vários vídeos curtos para redes sociais, com legendas e os trechos mais interessantes escolhidos pela IA. |
 
 ## Voz, áudio e música
 
@@ -75,6 +78,12 @@ Situação em outubro de 2026. Ferramentas de IA mudam de nome, de dono e de pre
 | --- | --- | --- | --- |
 | <img src="imagens/logos/elevenlabs.png" alt="ElevenLabs" data-size="line"> **ElevenLabs** | ElevenLabs | Comercial | Vozes artificiais muito realistas em dezenas de línguas: narração, dublagem e atendentes por voz. Clonar a voz de alguém exige o consentimento da pessoa. |
 | <img src="imagens/logos/suno.png" alt="Suno" data-size="line"> **Suno** | Suno | Comercial | Cria músicas completas, com letra, voz e instrumentos, a partir de uma descrição. Bom para jingles e trilhas de vídeo. |
+| <img src="imagens/logos/speechify.png" alt="Speechify" data-size="line"> **Speechify** | Speechify | Comercial | Lê em voz alta textos, PDFs e páginas da web com vozes naturais. Útil para estudar ouvindo e para acessibilidade. |
+| <img src="imagens/logos/descript.png" alt="Descript" data-size="line"> **Descript** | Descript | Comercial | Edita áudio e vídeo como se fosse um documento de texto: apagar uma palavra da transcrição apaga o trecho da gravação. Remove "éééé" e silêncios automaticamente. |
+| <img src="imagens/logos/adobe-podcast.png" alt="Adobe Podcast" data-size="line"> **Adobe Podcast** | Adobe | Comercial | Limpa gravações feitas com celular ou em lugares barulhentos, deixando a voz com som de estúdio (função *Enhance Speech*). |
+| <img src="imagens/logos/otter.png" alt="Otter.ai" data-size="line"> **Otter.ai** | Otter.ai | Comercial | Entra em reuniões online, transcreve tudo em tempo real e gera resumo e lista de tarefas. |
+| <img src="imagens/logos/fireflies.png" alt="Fireflies.ai" data-size="line"> **Fireflies.ai** | Fireflies.ai | Comercial | Assistente de reuniões que grava, transcreve e permite buscar o que foi dito em cada reunião. Integra com CRM e ferramentas de vendas. |
+| <img src="imagens/logos/stable-audio.png" alt="Stable Audio" data-size="line"> **Stable Audio** | Stability AI | Comercial e aberto | Gera músicas instrumentais e efeitos sonoros a partir de texto, com versões abertas para uso local. |
 | <img src="imagens/logos/whisper.png" alt="Whisper" data-size="line"> **Whisper** | OpenAI | Aberto | Modelo aberto que transcreve áudio em texto em quase cem línguas. Roda no seu computador: útil para transcrever entrevistas e reuniões sem enviá-las a ninguém. |
 
 ## Design, apresentações e produtividade
